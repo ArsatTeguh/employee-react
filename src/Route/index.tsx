@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AuthRoutes, ValidateAuth } from "./public";
 import { PrivateRoutes, ValidatePrivate } from "./private";
+import { AuthRoutes, ValidateAuth } from "./public";
+import NotFound from "../Components/notFound";
 
 const Routers = () => {
   return (
@@ -18,6 +19,7 @@ const Routers = () => {
               <Route path={path} element={component} key={i} />
             ))}
           </Route>
+          <Route path={"*"} element={<NotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
