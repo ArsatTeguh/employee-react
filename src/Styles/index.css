@@ -3,16 +3,15 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'helvetica';
-  src: url('./fonts/helvetica.ttf') format('truetype'),
-  url('./fonts/helvetica-light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+  font-family: "helvetica";
+  src: url("./fonts/helvetica.ttf") format("truetype"),
+    url("./fonts/helvetica-light.ttf") format("truetype");
+
 }
 
-body {
-  font-family: 'helvetica', sans-serif;
- 
+
+input::file-selector-button {
+  visibility: hidden;
 }
 
 
@@ -88,9 +87,8 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background: white url("/bintik.png") 100%  / auto auto no-repeat;
+  background: white url("/bintik.png") 100% / auto auto no-repeat;
   border-radius: 6px;
-
 }
 
 .login {
@@ -111,13 +109,17 @@ body {
   width: 100%;
   position: absolute;
   top: 0;
-  background: rgb(19,19,36);
-  background: linear-gradient(90deg, rgba(19,19,36,1) 0%, rgba(43,43,66,0.9556197478991597) 66%, rgba(25,28,41,0.9108018207282913) 100%);
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-z-index: -1;
-
+  background: rgb(19, 19, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(19, 19, 36, 1) 0%,
+    rgba(43, 43, 66, 0.9556197478991597) 66%,
+    rgba(25, 28, 41, 0.9108018207282913) 100%
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
 }
 
 .loader {
@@ -132,16 +134,35 @@ z-index: -1;
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .primary-gradient {
-  background: rgb(11,25,44);
-background: linear-gradient(180deg, rgba(11,25,44,1) 0%, rgba(10,23,40,1) 35%, rgba(0,0,0,1) 100%);
+  background: rgb(11, 25, 44);
+  background: linear-gradient(
+    180deg,
+    rgba(11, 25, 44, 1) 0%,
+    rgba(10, 23, 40, 1) 35%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
+
+.pattern {
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%238886c0' fill-opacity='0.21'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+/* Assuming you have a class for your dropdown */

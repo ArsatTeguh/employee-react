@@ -3,7 +3,7 @@ import { AiFillProject } from "react-icons/ai";
 import { TbProgress, TbProgressCheck, TbProgressDown } from "react-icons/tb";
 import { UseFetch } from "../../Common/useFetch";
 import CardUser from "../../Components/cardUser";
-import { CardProjects, Employee } from "../../Components/index";
+import { CardProjects, Quick } from "../../Components/index";
 
 const lisProjectProgres = [ 
   {
@@ -21,18 +21,18 @@ const lisProjectProgres = [
 ]
 
 export const Dashboard = () => {
-  const {data, loading, isError, onFetch, message} = UseFetch()
+  const {data, loading,onFetch} = UseFetch()
 
   useEffect(() => {
     onFetch({url: "/project-master", method: "GET"}).then()
   },[])
 
   return (
-    <div className="w-full p-4 lg:p-10 flex flex-col gap-10 ">
+    <div className="w-full p-4 lg:p-10 flex flex-col gap-10  ">
       <section className="flex flex-col lg:flex-row gap-8">
-        <div className="text-zinc-70 w-full">
+        <div className="text-zinc-70 w-full ">
           <div className="flex items-center gap-4 pb-10 lg:pb-8 ">
-            <p className="font-semibold text-4xl">Product Master</p>
+            <p className="font-semibold text-4xl">Project Master</p>
             <p className="text-2xl text-primary">
               <AiFillProject />
             </p>
@@ -46,9 +46,9 @@ export const Dashboard = () => {
               ))
            : 
            lisProjectProgres.map((v , i: number) => (
-              <div className="relative  bg-slate-50 mt-2" key={i}>
+              <div className="relative  bg-zinc-50  mt-2" key={i}>
             
-                <div className="project  shadow-sm border border-zinc-100 px-4 pt-10 pb-10 rounded-sm ">
+                <div className="project  shadow-sm border  px-4 pt-10 pb-10 rounded-md ">
                   <p className="font-semibold text-center"> {v.status}</p>
                   <span className="block h-[1px] w-24 bg-zinc-300 rounded-full " />
                   <p className="font-semibold text-black  text-2xl pt-2 text-center ">
@@ -76,7 +76,7 @@ export const Dashboard = () => {
         <CardUser bool={loading} data={data?.employee} />
       </div>
       <div className="">
-        <Employee />
+        <Quick />
       </div>
     </div>
   )

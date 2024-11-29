@@ -38,18 +38,20 @@ export const ValidatePrivate = () => {
   const notAccess = PrivateRoutes.filter((route) => route.role != roleRestricted)
 
   return (
-    <div className="w-full">
+    <div className="w-full  ">
       <div className="w-64 fixed md:block hidden">
         <Sidebar decoded={data} />
       </div>
-      <div className="relative md:hidden">
+      <div className="relative md:hidden ">
         <ButtonNavbar />
       </div>
-      <div className="lg:pl-64">
+      <div className="lg:pl-64 lg:pr-3  bg-zinc-100   lg:py-3  ">
        {notAccess.find(e => e.path.includes(location.pathname)) && data.role == roleRestricted ? (
         <Navigate to="/attedance" />
        ) : (
-        <Outlet />
+        <div className=" bg-base-100 pb-14 lg:pb-0 lg:border lg:rounded-lg  lg:shadow-lg">
+          <Outlet />
+        </div>
        )}
       </div>
     </div>

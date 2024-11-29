@@ -1,10 +1,10 @@
-import React from "react";
+import { Fragment } from "react";
 import ReactDOM from "react-dom/client";
+import ".//Common//axios.tsx";
 import App from "./App.tsx";
 import "./Styles/index.css";
-import ".//Common//axios.tsx"
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <Fragment>
     <App />
-  </React.StrictMode>
+  </Fragment>
 );

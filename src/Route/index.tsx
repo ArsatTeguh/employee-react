@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { PrivateRoutes, ValidatePrivate } from "./private";
+import { PrivateRoutes, PrivateRoutesHome, ValidatePrivate } from "./private";
 import { AuthRoutes, ValidateAuth } from "./public";
 import NotFound from "../Components/notFound";
+import { EmployyeeById } from "../Pages/private";
 
 const Routers = () => {
   return (
@@ -18,7 +19,13 @@ const Routers = () => {
             {PrivateRoutes.map(({ path, component }, i) => (
               <Route path={path} element={component} key={i} />
             ))}
+            <Route path={"/"} element={<EmployyeeById />}>
+              {PrivateRoutesHome.map(({ path, component }, i) => (
+                <Route path={"/employee"+path} element={component} key={i} />
+              ))}
+            </Route>
           </Route>
+
           <Route path={"*"} element={<NotFound />} />
         </Routes>
       </Suspense>

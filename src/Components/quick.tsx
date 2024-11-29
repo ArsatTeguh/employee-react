@@ -30,7 +30,7 @@ const ListQuick = [
     },
   ]
 
-export function Employee() {
+export function Quick() {
     return (
         <div className=" text-zinc-700 primary-gradient relative rounded-md ">
             <div className="items-center relative  justify-center gap-8 w-full h-full pr-10 pl-6 py-16 flex flex-col lg:flex-row rounded-md ">

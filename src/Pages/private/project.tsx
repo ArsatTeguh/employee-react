@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UseFetch } from "../../Common/useFetch";
 type Props = {};
 
@@ -7,15 +7,29 @@ export const Project = ({}: Props) => {
   const  [status, setStatus] = useState("")
   const [estimation, setEstimation] = useState("")
 
-  const { data, loading, message, isError, onFetch } = UseFetch();
+  const { loading, message, isError, onFetch, setMesage, setIsError } = UseFetch();
 
   const onSubmit =  (e: any) => {
     e.preventDefault()
     // alert(JSON.stringify({name, status, estimation}))
-   onFetch({method: "POST", url:"/project", payload:{name, status, estimation}}).then((e) => {
-
-   })
+   onFetch({method: "POST", url:"/project", payload:{name, status, estimation}}).then(() => {})
+   setName("")
+   setStatus("")
+   setEstimation("")
   }
+
+  useEffect(() => {
+    let handler: any
+    if(message !== "") {
+      handler = setTimeout(() => {
+        setMesage("")
+        setIsError(false)
+      },2000)
+    }
+
+    return () => clearTimeout(handler)
+
+  },[message])
 
   return (
     <div className="w-full h-full flex flex-col justify-center pt-10 items-center">
@@ -90,6 +104,7 @@ export const Project = ({}: Props) => {
           Create Product
         </button>
       </form>
+  
     </div>
   );
 };

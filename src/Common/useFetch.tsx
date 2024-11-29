@@ -20,27 +20,37 @@ export const UseFetch = () => {
                 case 'POST':
                     response = await axios.post(`${import.meta.env.VITE_REACT_APP_BASE_URL}${url}`, payload);
                     break;
-                case 'PUT':
-                    response = await axios.put(`${import.meta.env.VITE_REACT_APP_BASE_URL}${url}`);
+                case 'PATCH':
+                    response = await axios.patch(`${import.meta.env.VITE_REACT_APP_BASE_URL}${url}`, payload);
                     break;
                 case 'DELETE':
                     response = await axios.delete(`${import.meta.env.VITE_REACT_APP_BASE_URL}${url}`);
+                    break;
+                case 'PARAMS':
+                    response = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}${url}`, {
+                        params: payload
+                    });
                     break;
                 default:
                     throw new Error(`Unsupported method: ${method}`);
             }
 
-            setData(response.data.data)
-            setMesage(response.data.message)
-  
+            if(method == "GET" || method == "PARAMS") {
+                setData(response.data.data)
+            }
+
+            setMesage(response?.data?.message || 'Somethings Wrong, Pleases try Again')
+            return response.data.data
             
         } catch (error: any) {
             setIsError(true)           
-            setMesage(error.response.data.message)
+            setMesage(error?.response?.data?.message || 'Somethings Wrong, Pleases try Again')
+            throw new Error(error.response.status);
+            
         } finally {
             setLoading(false)
         }
     }
    
-    return {data, loading, isError, onFetch, message}
+    return {data, loading, isError, onFetch, message, setMesage, setIsError}
 }
