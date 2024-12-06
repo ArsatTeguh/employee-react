@@ -34,6 +34,8 @@ const close = () => {
 }
   const onSubmit = (e: any) => {
     e.preventDefault()
+    setIsError(false)
+    setMesage("")
     onFetch({method:"PATCH", payload:{name:contact.name,address:contact.address,phone:Number(contact.phone)}, url:"/employee"}).then(() => {
       setEmployee((e) => ({...e, name:contact.name, phone:contact.phone, address: contact.address}))
     })
@@ -42,23 +44,23 @@ const close = () => {
   return (
 <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-xl shadow-xl">
-        <div className="px-6 pt-12 pb-8 relative">
+        <div className="lg:px-6 px-4 pt-12 pb-8 relative">
           {/* Header */}
           <div className=" mb-2 flex gap-1 px-2">
             <p className="-rotate-12 text-lg">
               <ImFlag />
             </p>
-            <div className="flex flex-col  gap-1">
-              <h2 className="text-xl font-semibold">Edit Contact</h2>
-              <p className="text-gray-600 text-sm mb-6">
+            <div className="flex flex-col  lg:gap-1">
+              <h2 className="lg:text-xl text-base font-semibold">Edit Contact</h2>
+              <p className="text-gray-600 text-sm lg:mb-6 mb-4">
                 Change New contact 
               </p>
             </div>
           </div>
-          <div className="px-3 bg-black/10 absolute rounded-full right-4 top-3 text-zinc-700 hover:bg-black/20 cursor-pointer"
+          <div className="px-3 bg-black/10 absolute rounded-full lg:right-4 lg:top-3 right-2 top-2  text-zinc-700 hover:bg-black/20 cursor-pointer"
           onClick={close}
           >
-            <p className="text-xl text-center mb-1 flex justify-center w-full h-full items-center text-">
+            <p className="text-xl text-center mb-1 flex justify-center w-full h-full items-center">
               x
             </p>
           </div>
@@ -70,17 +72,17 @@ const close = () => {
           } ${isError ? " bg-red-600" : "bg-green-600"}`}
         >
           {message?.length != 0 && message?.length != 0  && (
-            <p className="text-zinc-100 text-center capitalize">{message}</p>
+            <p className="text-zinc-100 text-center text-sm lg:text-base capitalize">{message}</p>
           )}
         </div>
           
-          <form className="space-y-4" onSubmit={onSubmit}>
+          <form className="lg:space-y-4 space-y-2" onSubmit={onSubmit}>
             <div>
               <label className="block text-sm  font-medium text-black mb-1">
                 Email<span className="text-red-500"> *</span>
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-[12px] text-xl text-gray-500">
+                <span className="absolute left-2 lg:left-3 top-[12px] lg:text-xl text-base text-gray-500">
                   <MdEmail />
                 </span>
                 <input
@@ -90,19 +92,19 @@ const close = () => {
                   onChange={handleChange}
                   type="email"
                   placeholder="e.g @gmail.com"
-                  className="disabled:bg-zinc-100 w-full pl-10 pr-5 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                  className="disabled:bg-zinc-100 text-sm lg:text-base w-full pl-7 lg:pl-10 pr-5 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                 />
               </div>
             </div>
 
  
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-1 lg:gap-4">
               <div>
                 <label className="block text-sm  font-medium text-black mb-1">
                   Full Name<span className="text-red-500"> *</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-[12px] w-3 h-3 text-gray-500">
+                  <span className="absolute left-2 lg:left-3 top-[12px] lg:text-lg text-sm text-gray-500">
                     <FaUser />
                   </span>
                   <input
@@ -111,7 +113,7 @@ const close = () => {
                     onChange={handleChange}
                     type="text"
                     placeholder="Enter Username"
-                    className="w-full pl-9 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    className="w-full pl-7 lg:pl-9 text-sm lg:text-base pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
@@ -120,7 +122,7 @@ const close = () => {
                   No.Hp<span className="text-red-500"> *</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-[12px] w-3 h-3 text-gray-500">
+                  <span className="absolute left-2 lg:left-3 top-[12px] lg:text-lg text-sm text-gray-500">
                     <FaUser />
                   </span>
                   <input
@@ -128,8 +130,8 @@ const close = () => {
                     value={contact.phone}
                     onChange={handleChange}
                     type="number"
-                    placeholder="Enter Username"
-                    className="w-full pl-9 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    placeholder="Enter Phone"
+                    className="w-full text-sm lg:text-base pl-7 lg:pl-9 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
@@ -144,9 +146,9 @@ const close = () => {
                 name="address"
                 value={contact.address}
                 onChange={handleChange}
-                rows={4}
+                rows={2}
                 placeholder="e.g. you can add province, city and current address"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md  focus:border-primary "
+                className="w-full text-sm lg:text-base px-3 py-2 border border-gray-300 rounded-md  focus:border-primary "
               />
               <div className="text-sm text-gray-500 ">100 characters left</div>
             </div>
@@ -154,15 +156,15 @@ const close = () => {
             <button
             type="submit"
           
-              className="px-4 py-2 text-black w-full border-2 rounded border-zinc-500 hover:bg-primary hover:text-base-100"
+              className="px-4 text-sm lg:text-base py-2 text-black w-full border-2 rounded border-zinc-500 hover:bg-primary hover:text-base-100"
               onClick={() => handleCLose(false)}
             >
               Back
             </button>
             <button
               disabled={loading} 
-            type="submit" className="px-4 py-2 disabled:bg-zinc-500 bg-primary w-full border text-white rounded-md hover:bg-primary/90 focus:ring-offset-2">
-              Save contact
+            type="submit" className="px-4 py-2 text-sm lg:text-base disabled:bg-zinc-500 bg-primary w-full border text-white rounded-md hover:bg-primary/90 focus:ring-offset-2">
+              Save 
             </button>
           </div>
           </form>

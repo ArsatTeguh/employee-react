@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImFlag } from "react-icons/im";
 import { UseFetch } from "./useFetch";
 
@@ -43,6 +43,17 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
     );
   };
 
+  useEffect(() => {
+    let interval:any
+    if (message !== "") {
+      interval = setTimeout(() => {
+        setMesage("")
+        setIsError(false)
+      } ,1500)
+    }
+    return () => clearTimeout(interval)
+  },[message])
+
   return (
     <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-xl shadow-xl">
@@ -52,17 +63,17 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
             <p className="-rotate-12 text-lg">
               <ImFlag />
             </p>
-            <div className="flex flex-col  gap-1">
-              <h2 className="text-xl font-semibold">Edit Wallet</h2>
-              <p className="text-gray-600 text-sm mb-6">
+            <div className="flex flex-col  lg:gap-1">
+              <h2 className="lg:text-xl text-base font-semibold">Edit Wallet</h2>
+              <p className="text-gray-600 text-sm lg:mb-6 mb-4">
                 Lorem ipsum dolor sit.
               </p>
             </div>
           </div>
-          <div className="px-3 bg-black/10 absolute rounded-full right-4 top-3 text-zinc-600 hover:bg-black/20 cursor-pointer"
+          <div className="px-3 bg-black/10 absolute rounded-full lg:right-4 lg:top-3 right-2 top-2  text-zinc-600 hover:bg-black/20 cursor-pointer"
           onClick={close}
           >
-            <p className="text-xl text-center mb-1 flex justify-center w-full h-full items-center text-">
+            <p className="text-xl text-center mb-1 flex justify-center w-full h-full items-center ">
               x
             </p>
           </div>
@@ -74,11 +85,11 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
             } ${isError ? " bg-red-600" : "bg-green-600"}`}
           >
             {message?.length != 0 && message?.length != 0 && (
-              <p className="text-zinc-100 text-center capitalize">{message}</p>
+              <p className="text-zinc-100 text-sm lg:text-base text-center capitalize">{message}</p>
             )}
           </div>
 
-          <form className="space-y-4" onSubmit={onSubmit}>
+          <form className="space-y-4 " onSubmit={onSubmit}>
             <div>
               <label className="block text-sm  font-medium text-black mb-1">
                 Hourly salary<span className="text-red-500"> *</span>
@@ -94,7 +105,7 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2 lg:gap-4">
               <div>
                 <label className="block text-sm  font-medium text-black mb-1">
                   Monthly salary<span className="text-red-500"> *</span>
@@ -106,7 +117,7 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
                     onChange={handleChange}
                     type="number"
                     placeholder="Enter Username"
-                    className="w-full pl-4 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    className="w-full pl-4 pr-4 py-2 border text-sm lg:text-base placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
@@ -120,14 +131,14 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
                     value={contact.no_rekening}
                     onChange={handleChange}
                     type="number"
-                    placeholder="Enter Username"
-                    className="w-full pl-4 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    placeholder="ex: 6982"
+                    className="w-full pl-4 pr-4 py-2 text-sm lg:text-base border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 pb-4">
+            <div className="grid grid-cols-2 gap-2 lg:gap-4 pb-4">
               <div>
                 <label className="block text-sm  font-medium text-black mb-1">
                   Name banking<span className="text-red-500"> *</span>
@@ -138,8 +149,8 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
                     value={contact.name_banking}
                     onChange={handleChange}
                     type="text"
-                    placeholder="Enter Username"
-                    className="w-full pl-4 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    placeholder="Alexander..."
+                    className="w-full pl-4 pr-4 py-2 text-sm lg:text-base border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
@@ -153,8 +164,8 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
                     value={contact.type_banking}
                     onChange={handleChange}
                     type="text"
-                    placeholder="Enter Username"
-                    className="w-full pl-4 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    placeholder="BCA"
+                    className="w-full pl-4 pr-4 py-2 text-sm lg:text-base border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
@@ -162,7 +173,7 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
             <div className="flex justify-between  gap-4">
               <button
                 type="submit"
-                className="px-4 py-2 text-black w-full border-2 rounded border-zinc-500 hover:bg-primary hover:text-base-100"
+                className="px-4 py-2 text-black w-full text-sm lg:text-base border-2 rounded border-zinc-500 hover:bg-primary hover:text-base-100"
                 onClick={() => handleCLose(false)}
               >
                 Back
@@ -170,9 +181,9 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
               <button
                 disabled={loading}
                 type="submit"
-                className="px-4 py-2 disabled:bg-zinc-500 bg-primary w-full border text-white rounded-md hover:bg-primary/90 focus:ring-offset-2"
+                className="px-4 py-2 disabled:bg-zinc-500 text-sm lg:text-base bg-primary w-full border text-white rounded-md hover:bg-primary/90 focus:ring-offset-2"
               >
-                Save contact
+                Save
               </button>
             </div>
           </form>

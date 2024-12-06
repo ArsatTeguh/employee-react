@@ -1,5 +1,3 @@
-export * from "./dashboard";
-export * from "./project";
 export * from "./project-list"
 export * from "./attedances/attedances"
 export * from "./attedances/attedances-list"
@@ -10,3 +8,5 @@ export * from './byid/employyeeById'
 export * from './task/task'
 export * from './employee/employeeById'
 export * from './leave/leave'
+export * from './leave-non/tableLeave-non'
+export * from './leave-non/leave-non'

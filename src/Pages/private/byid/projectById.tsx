@@ -32,10 +32,11 @@ export function ProjectById() {
   const [isProject, setIsProject] = useState(false);
   const [projectData, setProjectData] = useState<TypeProjectData | any>([]);
   const [isDelete, setIsDelete] = useState<boolean>(false);
+  const [preload, setPreload] = useState(0)
 
   const navigate = useNavigate();
-  const { loading, isError, onFetch, message, setMesage, setIsError } =
-    UseFetch();
+  const {  onFetch, loading:bool } = UseFetch();
+  const { isError:err, onFetch:fetchPosition, message:msgPosition, setMesage:setMsg, setIsError:errPosition, loading:load } = UseFetch();
 
   const random = Math.floor(Math.random() * 101);
   const { id } = useParams();
@@ -47,6 +48,7 @@ export function ProjectById() {
 
   const onAddPositions = (data: TypeIntial) =>
     setPositions((e) => [...e, data]);
+
   const onDeletePositions = (index: number) =>
     setPositions((e) => e.filter((e) => e.id !== index));
 
@@ -62,7 +64,10 @@ export function ProjectById() {
     );
   };
 
-  const handleEmpId = (id: number, value: { name: string; id: number | null }) => {
+  const handleEmpId = (
+    id: number,
+    value: { name: string; id: number | null }
+  ) => {
     setPositions((prev) =>
       prev.map((position) =>
         position.id === id
@@ -78,6 +83,9 @@ export function ProjectById() {
   };
 
   const onSubmit = () => {
+    errPosition(false);
+    setMsg("");
+    setValid(false);
     const validate = hasEmptyField(positions);
     const format = positions.map((e) => {
       return {
@@ -87,27 +95,29 @@ export function ProjectById() {
         project_id: parseFloat(id!),
       };
     });
-
     if (validate) {
       setValid(validate);
-      setIsError(validate);
-      setMesage("make sure all data filled in");
+      errPosition(validate);
+      setMsg("make sure all data filled in");
     } else {
       setValid(true);
-      onFetch({ method: "PATCH", url: "/positions", payload: format}).then(
-        () => {setIsError(false)}
+      fetchPosition({ method: "PATCH", url: "/positions", payload: format }).then(
+        () => {
+          errPosition(false);
+        }
       );
     }
   };
 
-  const onDeleteProject = (path: string) => {
+  const onDeleteProject = (_path: string) => {
     onFetch({ method: "DELETE", url: "/project/" + id }).then(() => {
-      navigate(path);
+      navigate("/project");
     });
   };
 
   useEffect(() => {
-    onFetch({ method: "GET", url: "project/" + id })
+    if (preload == 0) {
+      onFetch({ method: "GET", url: "project/" + id })
       .then((res: any) => {
         setProjectData(res);
         if (res?.position?.length > 0) {
@@ -145,6 +155,9 @@ export function ProjectById() {
           navigate("/not-found");
         }
       });
+    }
+    setPreload(1)
+    return () => {}
   }, [id]);
 
   return (
@@ -157,17 +170,19 @@ export function ProjectById() {
           setPopup={setPopup}
         />
       )}
+
       {isDelete && (
         <ConfirmationPopup submit={onDeleteProject} setIsDelete={setIsDelete} />
       )}
+
       <div className=" p-4 relative mb-6 text-black flex flex-col gap-4 lg:min-h-[720px] ">
-        <div className="  h-64 relative w-full rounded-md  bg-zinc-100">
-          <div className="absolute right-6 lg:top-3 top-5 flex flex-col lg:flex-row items-center gap-4">
+        <div className=" h-52 lg:h-64 relative w-full rounded-md  bg-zinc-100">
+          <div className="absolute right-3 lg:right-6 lg:top-3 top-6 flex flex-col lg:flex-row items-center gap-2 lg:gap-4">
             <span
               className=" text-sm flex items-center gap-2 border-2 border-primary  hover:bg-primary  rounded-full p-2 text-white cursor-pointer bg-primary/90 font-semibold "
               onClick={() => setIsProject(true)}
             >
-              <p className="text-xl">
+              <p className="lg:text-xl">
                 <RiPencilFill />
               </p>
             </span>
@@ -175,99 +190,140 @@ export function ProjectById() {
               className=" text-lg lg:text-sm flex items-center gap-2 border-2 hover:bg-red-600 hover:text-white hover:border-red-600 border-primary rounded-full p-2 text-primary cursor-pointer font-semibold "
               onClick={() => setIsDelete(true)}
             >
-              <FaTrash />
+              <p className="text-sm lg:text-base">
+                <FaTrash />
+              </p>
             </span>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 col w-full h-full px-5">
-            <div className="  h-full flex items-center gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 col w-full h-full px-2 lg:px-5">
+            <div className="  h-full flex items-center gap-3 lg:gap-5">
               <div className=" lg:h-32 h-20 flex items-center justify-center  lg:w-32 w-20 rounded-full  bottom-5 left-5 bg-zinc-200">
                 <p className="lg:text-6xl text-4xl text-primary">
                   {" "}
                   <PiProjectorScreenFill />
                 </p>
               </div>
-              <div className="flex flex-col">
-                <p className="text-2xl font-semibold">{projectData?.name}</p>
-                <p className="pt-2">{projectData?.position?.length} Person</p>
-                <p className="">{projectData?.Estimation} Duration</p>
-              </div>
+              {bool ? (
+                <div className="w-1/3">
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton mt-2 h-4 w-full"></div>
+                </div>
+              ) : (
+                <div className="flex flex-col flex-wrap">
+                  <p className="text-xl  lg:text-2xl font-semibold">
+                    {projectData?.name}
+                  </p>
+                  <p className="lg:pt-2 pt-1 lg:text-base text-sm">
+                    {projectData?.position?.length} Person
+                  </p>
+                  <p className="lg:text-base text-sm">
+                    {projectData?.Estimation} Duration
+                  </p>
+                </div>
+              )}
             </div>
-            <div className="flex flex-col lg:items-end px-5   justify-center gap-2">
-              <p className="font-semibold  text-xl ">Project #{id}</p>
-              <div className="flex items-center  gap-3">
-                <p className="text-4xl">
+            <div className="flex flex-col lg:items-end lg:px-5 px-2   justify-center gap-2">
+              <p className="font-semibold text-base lg:text-xl ">
+                Project #{id}
+              </p>
+              <div className="flex items-center  gap-2 lg:gap-3">
+                <p className="text-3xl lg:text-4xl">
                   {" "}
                   <FaCirclePlay />
                 </p>
-                <p className="font-semibold">{projectData?.status}</p>
+                {bool ? (
+                
+                    <span className="skeleton h-4 w-1/3 lg:w-full block px-10"></span>
+                 
+                ) : (
+                  <p className="font-semibold lg:text-base text-sm">
+                    {projectData?.status}
+                  </p>
+                )}
               </div>
             </div>
           </div>
         </div>
-        <div
-          className={`transition-all   ease-in-out   rounded-sm   ${
-            message?.length == 0 || !valid ? "h-0 " : "h-auto  py-2 px-4 "
-          } ${isError ? " bg-red-600" : "bg-green-600"}`}
-        >
-          {message?.length != 0 && valid && (
-            <p className="text-zinc-100 text-center capitalize">{message}</p>
-          )}
+        <div className="flex justify-center">
+          <div
+            className={`transition-all   ease-in-out   rounded   ${
+              msgPosition?.length == 0 || !valid ? "h-0 " : "h-auto   py-2 px-8 "
+            } ${err ? " bg-red-600" : "bg-green-600"}`}
+          >
+            {msgPosition?.length != 0 && valid && (
+              <p className="text-zinc-100 lg:text-base text-sm text-center capitalize">
+                {msgPosition}
+              </p>
+            )}
+          </div>
         </div>
 
         <div
-          className={`px-5 pb-5 pt-14 pattern relative border-slate-400 flex flex-wrap gap-4 ${
-            positions?.length > 3 ? "justify-center" : "justify-start"
+          className={`px-2 lg:px-5 pb-5 lg:pt-14 pt-4 pattern relative border-slate-400 flex  flex-wrap gap-4 ${
+            positions?.length > 3
+              ? "justify-center"
+              : "lg:justify-start justify-center"
           } `}
         >
-          {positions.map((v, i) => (
-            <div
-              key={i}
-              className="flex flex-col bg-zinc-100 px-3 pt-8 pb-3 rounded relative  gap-2"
-            >
-              <input
-                type="text"
-                placeholder="Name"
-                className="border disabled:bg-slate-100 py-2 px-4 rounded"
-                name="name"
-                defaultValue={v.name}
-                disabled
-              />
-              <input
-                type="text"
-                placeholder="Status"
-                className="border py-2 px-4 rounded"
-                name="status"
-                value={v.status}
-                onChange={(e) => handleChange(e, v.id)}
-              />
-              {v.id_employee.id === null ? (
+          {bool
+            ? Array(3)
+                .fill(null)
+                .map((_, i: number) => (
+                  <div
+                    key={i}
+                    className="skeleton   rounded h-36 lg:w-1/5 w-[90%] "
+                  ></div>
+                ))
+            : positions.map((v, i) => (
                 <div
-                  className="text-sm text-center bg-white px-2 py-4 rounded cursor-pointer hover:bg-primary hover:text-white"
-                  onClick={() => onPopup(v.id)}
+                  key={i}
+                  className="flex flex-col bg-zinc-100 px-3 pt-8 pb-3 rounded relative  gap-2"
                 >
-                  Add Employee +
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    className="border lg:text-base text-sm disabled:bg-slate-100 py-2 px-4 rounded"
+                    name="name"
+                    defaultValue={v.name}
+                    disabled
+                  />
+                  <input
+                    type="text"
+                    placeholder="Status"
+                    className="border lg:text-base text-sm py-2 px-4 rounded"
+                    name="status"
+                    value={v.status}
+                    onChange={(e) => handleChange(e, v.id)}
+                  />
+                  {v.id_employee.id === null ? (
+                    <div
+                      className="text-sm text-center bg-white px-2 lg:py-4 py-3 rounded cursor-pointer hover:bg-primary hover:text-white"
+                      onClick={() => onPopup(v.id)}
+                    >
+                      Add Employee +
+                    </div>
+                  ) : (
+                    <div
+                      className="text-sm text-center bg-primary/90 text-white px-2 lg:py-4 py-3 rounded cursor-pointer hover:bg-primary "
+                      onClick={() => onPopup(v.id)}
+                    >
+                      Has been Add
+                    </div>
+                  )}
+                  {i >= 1 && (
+                    <span
+                      onClick={() => onDeletePositions(v.id)}
+                      className="absolute  text-primary/90 hover:text-primary cursor-pointer font-semibold right-3 top-2"
+                    >
+                      <FaTrash />
+                    </span>
+                  )}
                 </div>
-              ) : (
-                <div
-                  className="text-sm text-center bg-primary/90 text-white px-2 py-4 rounded cursor-pointer hover:bg-primary "
-                  onClick={() => onPopup(v.id)}
-                >
-                  Has been Add
-                </div>
-              )}
-              {i >= 1 && (
-                <span
-                  onClick={() => onDeletePositions(v.id)}
-                  className="absolute  text-primary/90 hover:text-primary cursor-pointer font-semibold right-3 top-2"
-                >
-                  <FaTrash />
-                </span>
-              )}
-            </div>
-          ))}
-          <div className="justify-end flex    h-full  w-full">
+              ))}
+
+          <div className="justify-end flex lg:mt-0 mt-10  h-full  w-full">
             <button
-              className="  px-8 py-2 rounded flex hover:bg-primary  bg-primary/90 text-white text-sm"
+              className=" px-8 py-2 rounded flex hover:bg-primary  bg-primary/90 text-white text-sm"
               onClick={() =>
                 onAddPositions({
                   id: random,
@@ -285,12 +341,13 @@ export function ProjectById() {
         <div className="flex items-center gap-4 justify-end">
           <button
             className=" py-2 mt-4 hover:bg-primary text-sm hover:text-white px-8 bg-white border-2 border-primary text-primary font-semibold rounded-md"
-            onClick={() => navigate("/master")}
+            onClick={() => navigate("/project")}
           >
             Back
           </button>
           <button
-            className=" py-2 mt-4 hover:bg-primary px-8 bg-primary/90 text-white rounded-md"
+           disabled={load}
+            className=" py-2 disabled:bg-zinc-500 mt-4 hover:bg-primary px-8 text-sm bg-primary/90 text-white rounded-md"
             onClick={onSubmit}
           >
             Save
@@ -299,7 +356,6 @@ export function ProjectById() {
         {isProject && (
           <EditProject
             id={id!}
-            onFetch={onFetch}
             projectData={projectData}
             onClose={setIsProject}
           />

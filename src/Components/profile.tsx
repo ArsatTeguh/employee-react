@@ -45,7 +45,7 @@ export function Profile() {
         />
       )}
       {loading ? (
-        <div className="flex w-full flex-col gap-4">
+        <div className="flex w-full  flex-col gap-4">
           <div className="skeleton h-32 w-full"></div>
           <div className="skeleton h-4 w-28"></div>
           <div className="skeleton h-4 w-full"></div>
@@ -53,33 +53,33 @@ export function Profile() {
         </div>
       ) : (
         <div className="w-full flex gap-3 flex-col rounded-md  border   ">
-          <div className="flex items-center justify-between border-b pb-2 px-6 py-2 bg-zinc-100">
-            <p className="font-semibold ">Wallet</p>
+          <div className="flex items-center justify-between border-b lg:pb-2 px-3 lg:px-6  py-2 bg-zinc-100">
+            <p className="font-semibold lg:text-base text-sm  ">Wallet</p>
             <p
-              className="p-2 rounded hover:bg-primary text-white bg-primary/90 cursor-pointer"
+              className="p-2 rounded hover:bg-primary text-sm lg:text-base text-white bg-primary/90 cursor-pointer"
               onClick={() => setIsEdit(true)}
             >
               <RiPencilFill />
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-y-6 mt-2  w-full items-center px-6 pb-4">
-            <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-2 lg:grid-cols-3 lg:text-base text-sm gap-y-6 mt-2  w-full items-center px-4 lg:px-6 pb-4">
+            <div className="flex flex-col gap-0 lg:gap-2 ">
               <p className="font-semibold">Hourly Salary</p>
               <p className="text-zinc-600">{FormatRupiahFromText(String(wallet.hourly_salary))}</p>
             </div>
-            <div className="flex flex-col lg:w-[300px] flex-wrap gap-2">
+            <div className="flex flex-col lg:w-[300px] flex-wrap gap-0 lg:gap-2">
               <p className="font-semibold">Monthly Salary</p>
               <p className="text-zinc-600">{FormatRupiahFromText(String(wallet.monthly_salary))}</p>
             </div>
-            <div className="flex flex-col lg:w-[300px] flex-wrap gap-2">
+            <div className="flex flex-col lg:w-[300px] flex-wrap gap-0 lg:gap-2">
               <p className="font-semibold">No Rekening</p>
               <p className="text-zinc-600">{wallet.no_rekening}</p>
             </div>
-            <div className="flex flex-col lg:w-[300px] flex-wrap gap-2">
+            <div className="flex flex-col lg:w-[300px] flex-wrap gap-0 lg:gap-2">
               <p className="font-semibold">Name Bank</p>
               <p className="text-zinc-600">{wallet.name_banking}</p>
             </div>
-            <div className="flex flex-col lg:w-[300px] flex-wrap gap-2">
+            <div className="flex flex-col lg:w-[300px] flex-wrap gap-0 lg:gap-2">
               <p className="font-semibold">Type Bank</p>
               <p className="text-zinc-600">{wallet.type_banking}</p>
             </div>

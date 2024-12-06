@@ -1,5 +1,5 @@
 import { FaInbox } from "react-icons/fa";
-import { FaCalendarDays } from "react-icons/fa6";
+import { FaCalendarDays,FaCircleUser } from "react-icons/fa6";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { RiDraggable } from "react-icons/ri";
 import { FormatDate } from "../../../Common/sortDate";
@@ -8,7 +8,8 @@ import { Details } from "./details";
 import { TbListDetails } from "react-icons/tb";
 import { LuActivity } from "react-icons/lu";
 import { BsAlignEnd } from "react-icons/bs";
-import { useEffect, useMemo, useState } from "react";
+import { MdOutlinePrivacyTip } from "react-icons/md";
+import { useMemo, useState } from "react";
 
 type Props = {
   task: GroupedTasks;
@@ -30,6 +31,7 @@ setCurrentTask: React.Dispatch<React.SetStateAction<{
   id: number;
   date: string;
 }>>
+role:string
 };
 
 type TypeTask = {
@@ -49,7 +51,7 @@ interface GroupedTasks {
   [date: string]: TypeTask[];
 }
 
-export function Task({currentTask, setCurrentTask,refreshTask, msg, task, updateStatus, updateAction, loading, message  }: Props) {
+export function Task({role,currentTask, setCurrentTask,refreshTask, msg, task, updateStatus, updateAction, loading, message  }: Props) {
   const [isDetail, setDetail] = useState(false);
 
   const details = useMemo(() => 
@@ -63,24 +65,33 @@ export function Task({currentTask, setCurrentTask,refreshTask, msg, task, update
   };
 
   return (
-    <div className="w-full h-full relative ">
+    <div className="w-full h-full relative pt-14 lg:pt-0">
       {msg === "Not Record" ? (
-        <div className="flex w-full flex-col lg:gap-4 gap-0  h-full justify-center items-center">
-          <p className="md:text-4xl text-2xl   py-4 px-10  rounded-sm  font-semibold text-zinc-200">
-            {msg} Task
-          </p>
-          <p className="lg:text-9xl text-8xl text-zinc-100">
+        <div className="flex w-full  lg:gap-4 gap-0  h-full justify-center py-20">
+           <p className="lg:text-6xl  text-zinc-100">
             <FaInbox />
           </p>
+          <p className="md:text-xl   py-4  rounded-sm   text-zinc-300">
+            {msg} Task
+          </p>
+         
         </div>
       ) : task?.entries?.length == 0 ? (
         <div className="">
           <div className="skeleton h-4 w-full"></div>
           <div className="skeleton h-4 w-full"></div>
         </div>
+      ) : msg === "Akses tidak diizinkan" ? (
+        <div className=" w-full justify-center pt-20 gap-1 lg:gap-2 flex">
+          <p className="text-zinc-300  text-3xl lg:text-4xl">
+            <MdOutlinePrivacyTip />
+          </p>
+          <p className="text-zinc-300 text-xl lg:text-2xl">Cann't Access</p>
+        </div>
       ) : (
-        <div className="flex flex-col gap-2">
-          {isDetail && <Details 
+        <div className="flex flex-col !z-20 gap-2">
+          {isDetail && <Details
+          role={role} 
           loading={loading} 
           message={message} 
           updateStatus={updateStatus} 
@@ -100,31 +111,35 @@ export function Task({currentTask, setCurrentTask,refreshTask, msg, task, update
                   <div
                     className={`collapse-title font-normal peer-checked:border-b `}
                   >
-                    <div className="grid  grid-cols-8 text-sm ">
+                    <div className="grid   text-sm ">
                       <div className="flex items-center col-span-2 gap-2">
                         <p className="text-sm p-2 rounded-md text-zinc-50 bg-primary/90">
                           <FaCalendarDays />
                         </p>
-                        <p>{FormatDate(date)}</p>
+                        <p className="lg:text-base text-sm">{FormatDate(date)}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="collapse-content  flex relative flex-col  pl-4   ">
+                  <div className="collapse-content  flex relative flex-col  pl-6   ">
                     {tasksForDate?.map((v: TypeTask, i: number) => (
                       <div key={v.id} className="relative py-1 text-sm  ">
                         <div className="flex items-center">
-                          <span className="text-zinc-300 text-xl">
+                          <span className="text-zinc-300 text-xl ">
                             <IoIosArrowRoundForward />
                           </span>
-                          <span className="text-zinc-400 text-xl">
+                          <span className="text-zinc-400 text-xl ">
                             <RiDraggable />
                           </span>
-                          <div className="grid grid-cols-8 w-full border border-zinc-100 pl-3 hover:bg-zinc-100  bg-zinc-50 px-5 py-2">
-                            <p className="col-span-3  ">{v.title}</p>
+                          <div className="grid grid-cols-5 lg:grid-cols-8 w-full border border-zinc-100 pl-3 hover:bg-zinc-100  bg-zinc-50 px-5 py-2">
+                            <p className="col-span-2  ">{v.title}</p>
+                            <div className="flex items-center gap-2 lg:col-span-0 col-span-2 ">
+                            <p className="text-zinc-600"><FaCircleUser/></p>
                             <p>{v.employee}</p>
+                          
+                            </div>
 
-                            <div className="flex items-center gap-2">
+                            <div className=" lg:flex hidden items-center gap-2">
                               <p
                                 className={`text-lg ${
                                   v.status === 1
@@ -144,7 +159,7 @@ export function Task({currentTask, setCurrentTask,refreshTask, msg, task, update
                                   : "Finished"}
                               </p>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="lg:flex hidden  items-center gap-2">
                               <p
                                 className={`text-lg ${
                                   v.action === 1
@@ -161,13 +176,14 @@ export function Task({currentTask, setCurrentTask,refreshTask, msg, task, update
                                   ? "Checking"
                                   : v.action == 2
                                   ? "Approved"
-                                  : v.action == 3 ? "Rejected"
+                                  : v.action == 3 
+                                  ? "Rejected"
                                   : "No action"
                                 }
                               </p>
                             </div>
 
-                            <div className="flex items-center gap-2">
+                            <div className="lg:flex hidden  items-center gap-2">
                               <p
                                 className={`text-xl ${
                                   v.level === 1

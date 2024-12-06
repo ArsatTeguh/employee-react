@@ -35,7 +35,6 @@ export function EmployeeById() {
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
     if (file) {
-      // Create a URL for the selected image
       const imageUrl = URL.createObjectURL(file);
       setProfile(() => ({ file: file, preview: imageUrl }));
     }
@@ -68,13 +67,13 @@ export function EmployeeById() {
     if(msgImage.length > 0) {
       timeout = setInterval(() => {
         setMsg("")
-      }, 1500);
+      }, 2500);
     }
     return () => clearInterval(timeout)
   },[msgImage])
 
   return (
-    <div className="w-full py-8 px-12 relative lg:min-h-[745px] ">
+    <div className="w-full py-8 lg:px-12 px-4 relative lg:min-h-[745px] ">
       <div className="flex justify-center">
         <div
           className={`transition-all   ease-in-out   rounded-sm   ${
@@ -82,7 +81,7 @@ export function EmployeeById() {
           } ${err ? " bg-red-600" : "bg-primary/90"}`}
         >
           {msgImage?.length != 0 && msgImage?.length != 0 && (
-            <p className="text-zinc-100 text-center capitalize">{msgImage}</p>
+            <p className="text-zinc-100 text-center lg:text-base text-sm capitalize">{msgImage}</p>
           )}
         </div>
       </div>
@@ -105,7 +104,7 @@ export function EmployeeById() {
         <div className="flex flex-col gap-4">
           <div className="avatar  flex  gap-2 items-center ">
             {!loading && profile?.file !== "" && profile.preview == "" ? (
-              <div className="w-40 rounded-full relative">
+              <div className="w-32 lg:w-40 rounded-full relative">
                 <img  loading="lazy" src={`http://localhost:8000/${profile?.file}`} alt="profile" className="object-cover" />
                 <span className="absolute cursor-pointer w-full h-10 flex items-center justify-center bottom-0  bg-black/50">
                 <input
@@ -122,11 +121,11 @@ export function EmployeeById() {
                 </span>
               </div>
             ) : (
-              <div className="w-40 h-40 bg-zinc-100 rounded-full relative">
+              <div className="w-32 h-32 lg:w-40 lg:h-40 bg-zinc-100 rounded-full relative">
                 {profile.file == "" && profile.preview == "" && (
                   <div className="flex items-center justify-center  h-full w-full">
-                    <p className="text-4xl capitalize">{employee.name[0]}</p>
-                    <p className="text-4xl capitalize">{employee.name[1]}</p>
+                    <p className="lg:text-4xl capitalize text-2xl">{employee.name[0]}</p>
+                    <p className="lg:text-4xl capitalize text-2xl">{employee.name[1]}</p>
                   </div>
                 )}
 
@@ -145,7 +144,7 @@ export function EmployeeById() {
                     </p>
                   </span>
                 ) : (
-                  <div className="w-40  h-40 rounded-full relative">
+                  <div className="lg:w-40 lg:h-40 w-32 h-32 rounded-full relative">
                     <img
                       className="object-cover"
                       src={profile.preview}
@@ -170,7 +169,7 @@ export function EmployeeById() {
             )}
           </div>
           {profile.file !== "" && profile.preview != "" && (
-            <div className="px-8 mb-4">
+            <div className="lg:px-8 px-5 mb-4">
               <button
               disabled={loadImage}
                 onClick={onSaveImage}
@@ -180,40 +179,40 @@ export function EmployeeById() {
               </button>
             </div>
           )}
-          <div className="">
+          <div className="mt-4 lg:mt-0">
             <div className="w-full  rounded  border h-full flex flex-col gap-4">
-              <div className="flex items-center justify-between border-b pb-2 px-6 py-2 bg-zinc-100">
+              <div className="flex items-center justify-between  border-b pb-2 px-4 lg:px-6 py-2 bg-zinc-100">
                 <p className="font-semibold ">Contact Detail</p>
                 <p
-                  className="p-2 rounded hover:bg-primary text-white bg-primary/90  cursor-pointer "
+                  className="p-[6px] lg:p-2 rounded hover:bg-primary text-white bg-primary/90  cursor-pointer "
                   onClick={() => setIsContact(true)}
                 >
                   <RiPencilFill />
                 </p>
               </div>
 
-              <div className="flex justify-between items-center px-6">
-                <div className="flex flex-col gap-2">
+              <div className="flex flex-col lg:flex-row lg:justify-between lg:gap-y-0 gap-y-4 lg:items-center px-4 lg:px-6">
+                <div className="flex flex-col lg:gap-2">
                   <p className="font-semibold ">Full Name</p>
                   <p className="text-zinc-600">{employee?.name}</p>
                 </div>
-                <div className="flex flex-col lg:w-[300px]  gap-2">
+                <div className="flex flex-col lg:w-[300px]  lg:gap-2">
                   <p className="font-semibold">Email</p>
                   <p className="text-zinc-600">{employee?.email}</p>
                 </div>
               </div>
-              <div className="flex justify-between mt-2  w-full items-center px-6 pb-4">
-                <div className="flex flex-col gap-2">
+              <div className="flex-col flex lg:flex-row lg:justify-between lg:gap-y-0 gap-y-4 lg:items-center px-4 lg:px-6 mt-2 w-full ">
+                <div className="flex flex-col lg:gap-2">
                   <p className="font-semibold">No.hp</p>
                   <p className="text-zinc-600">{employee?.phone}</p>
                 </div>
-                <div className="flex flex-col lg:w-[300px] flex-wrap gap-2">
+                <div className="flex flex-col lg:w-[300px] flex-wrap lg:gap-2">
                   <p className="font-semibold">Address</p>
                   <p className="text-zinc-600">{employee?.address}</p>
                 </div>
               </div>
-              <div className="flex justify-between w-full items-center px-6 pb-4">
-                <div className="flex flex-col gap-2">
+              <div className="flex justify-between w-full items-center px-4 lg:px-6 pb-4">
+                <div className="flex flex-col lg:gap-2">
                   <p className="font-semibold">Joined</p>
                   <p className="text-zinc-600">{employee?.join}</p>
                 </div>
@@ -223,20 +222,17 @@ export function EmployeeById() {
           </div>
 
           <div className="w-full flex gap-3 flex-col rounded  border h-full   ">
-            <div className="flex items-center justify-between border-b pb-2 px-6 py-2 bg-zinc-100">
+            <div className="flex items-center justify-between border-b pb-2 lg:px-6 px-4 py-2 bg-zinc-100">
               <p className="font-semibold ">Account Overview</p>
-              <p className="p-2 rounded hover:bg-primary text-white bg-primary/90 cursor-pointer">
+              <p className="p-[6px] lg:p-2 rounded rounded hover:bg-primary text-white bg-primary/90 cursor-pointer">
                 <RiPencilFill />
               </p>
             </div>
-            <div className="flex mt-2  flex-wrap gap-2 px-6">
+            <div className="flex mt-2 pb-5 flex-wrap gap-6 lg:gap-2 px-4 lg:px-6">
               <p className="font-semibold lg:w-[300px]">Password</p>
               <p className="text-zinc-600">******************</p>
             </div>
-            <div className="flex mt-2  flex-wrap gap-2 px-6 pb-4">
-              <p className="font-semibold lg:w-[300px]">Role</p>
-              <p className="text-zinc-600">Hr</p>
-            </div>
+
           </div>
         </div>
       )}

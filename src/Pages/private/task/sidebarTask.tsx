@@ -5,6 +5,7 @@ import { CurrentUser } from "../../../Common/currentUser";
 import { GroupTasksByDate } from "../../../Common/sortDate";
 import { UseFetch } from "../../../Common/useFetch";
 import { AddTask } from "./addTask";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Task } from "./task";
 
 type TypePaload = {
@@ -17,7 +18,7 @@ type TypePaload = {
 type TypeTask = {
   id: number;
   action_name: string;
-  title: string
+  title: string;
   description: string;
   status: number;
   level: number;
@@ -28,13 +29,12 @@ type TypeTask = {
 };
 
 const defaulTask = {
-  "" : []
-}
+  "": [],
+};
 
 interface GroupedTasks {
   [date: string]: TypeTask[];
 }
-
 
 export function SidebarTask() {
   const [currentId, setCurrentId] = useState<number>(0);
@@ -43,31 +43,46 @@ export function SidebarTask() {
   const [currentTask, setCurrentTask] = useState({ id: 0, date: "" });
 
   const { user } = CurrentUser();
-  const { loading, isError, onFetch, message,data } = UseFetch();
+  const { loading, isError, onFetch, message, data } = UseFetch();
+  const { onFetch: fetchTask, message: msg, loading: loadTask } = UseFetch();
+
   const {
-    onFetch: fetchTask,
-    message: msg,
-    isError: err,
-    setIsError: setErr,
-    setMesage: setmsg,
-    loading: loadTask
+    onFetch: updatedTask,
+    message: messageUpdate,
+    setMesage: setMessageUpdate,
+    loading: loadUpdate,
   } = UseFetch();
-  const {onFetch: updatedTask, message:messageUpdate, loading:loadUpdate} = UseFetch()
+
+  const {
+    onFetch: addFetch,
+    message: msgAdd,
+    setMesage: setMsgAdd,
+    isError: errAdd,
+    setIsError: setErrAdd,
+    loading: loadAdd,
+  } = UseFetch();
 
   const handleOpenProject = (condition: boolean) => {
-    setmsg("");
-    setErr(false);
+    setMsgAdd("");
+    setErrAdd(false);
     setIsAdd(condition);
   };
 
   const handleAddTask = (v: TypePaload) => {
-    fetchTask({
+    setErrAdd(false)
+    setMsgAdd("")
+    addFetch({
       url: `/task`,
       method: "POST",
-      payload: { ...v, project_id: currentId, employee_id: user.id, action: -1 },
+      payload: {
+        ...v,
+        project_id: currentId,
+        employee_id: user.id,
+        action: -1,
+      },
     }).then(() => {
-      handleDataTask(currentId)
-      setIsAdd(false)
+      handleDataTask(currentId);
+      setIsAdd(false);
     });
   };
 
@@ -82,10 +97,16 @@ export function SidebarTask() {
     fetchTask({ url: `/task/${currentId}`, method: "GET" }).then((e) =>
       setDataTask(GroupTasksByDate(e))
     );
-  }
+  };
 
   const updateStatus = useCallback(
-    ({status, idTask}: {status: number | undefined, idTask: number | undefined}) => {
+    ({
+      status,
+      idTask,
+    }: {
+      status: number | undefined;
+      idTask: number | undefined;
+    }) => {
       updatedTask({
         url: `/task/${idTask}`,
         method: "PATCH",
@@ -96,14 +117,31 @@ export function SidebarTask() {
   );
 
   const updateAction = useCallback(
-    ({action, idTask} : {action : number | undefined, idTask: number | undefined}) => {
+    ({
+      action,
+      idTask,
+    }: {
+      action: number | undefined;
+      idTask: number | undefined;
+    }) => {
       updatedTask({
         url: `/task/${idTask}`,
         method: "PATCH",
-        payload: { action_name: user.email ,action },
+        payload: { action_name: user.email, action },
       }).then(() => {});
+    },
+    [updatedTask]
+  );
+
+  useEffect(() => {
+    let timeout: any;
+    if (messageUpdate.length > 0) {
+      timeout = setInterval(() => {
+        setMessageUpdate("");
+      }, 2500);
     }
-    ,[updatedTask])
+    return () => clearInterval(timeout);
+  }, [messageUpdate]);
 
   useEffect(() => {
     onFetch({ url: "/projects", method: "GET" }).then((e) => {
@@ -116,78 +154,135 @@ export function SidebarTask() {
   }, []);
 
   return (
-    <div className="w-full bg-base-100  min-h-[747px]">
+    <div className="drawer w-full relative bg-base-100 ">
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-side z-[6]">
+        <label
+          htmlFor="my-drawer"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <ul className="menu bg-base-100 p-0  text-base-content min-h-full w-56 ">
+        <div className="px-4 py-3 flex items-center border-b rounded  gap-2 ">
+            <p className=" p-2 bg-primary/90 text-base rounded-md text-base-100">
+              <PiProjectorScreen />
+            </p>
+            <p className="font-medium">Projects</p>
+          </div>
+          <span className="pt-3"></span>
+         <div className="px-2">
+         {data?.projects?.map((v: { name: string; id: number }) => (
+            <li
+              key={v.id}
+              className={`py-1 px-4 rounded-md   ${
+                v.id === currentId
+                  ? "bg-zinc-200 text-black "
+                  : " text-zinc-500 "
+              } cursor-pointer font-medium text-sm hover:text-black flex items-start gap-2`}
+              onClick={() => handleDataTask(v.id)}
+            >
+              <p>{v.name}</p>
+            </li>
+          ))}
+         </div>
+        </ul>
+      </div>
       {isAdd && (
         <AddTask
           setIsAdd={handleOpenProject}
-          isError={err}
-          message={msg}
+          message={msgAdd}
+          isError={errAdd}
+          loading={loadAdd}
           handleEmployee={handleAddTask}
-          
         />
       )}
-      <div className="w-full h-full grid grid-cols-5">
-        <div className="border-r    w-full min-h-[745px] block">
+
+      <div className="w-full drawer-content h-full lg:grid grid-cols-5">
+        <div className="border-r lg:block   w-full min-h-[745px] hidden">
           <div className="border-b px-4 py-4  flex items-center gap-2">
-          <p className="p-2  bg-primary/90 rounded-md text-white"><PiProjectorScreen/></p>
-          <p className="font-semibold ">Projects</p>
+            <p className="p-2  bg-primary/90 rounded-md text-white">
+              <PiProjectorScreen />
+            </p>
+            <p className="font-semibold ">Projects</p>
           </div>
           {loading ? (
             <div className="p-4 flex flex-col gap-2">
-                <div className="skeleton h-4 w-full"></div>
-                <div className="skeleton h-4 w-full"></div>
-                <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
+              <div className="skeleton h-4 w-full"></div>
             </div>
           ) : (
             <div className="flex flex-col gap-1">
-            <p
-              className={`${
-                isError ? "py-2 px-6" : "p-0"
-              } text-sm bg-red-500 text-base-100 font-semibold text-center`}
-            >
-              {isError && message}
-            </p>
-            {data?.projects?.map((v: { name: string; id: number }) => (
-              <div
-                key={v.id}
-                className={`py-3 px-6  ${
-                  v.id === currentId
-                    ? "bg-zinc-100 text-black "
-                    : "bg-base-100 text-zinc-500 "
-                } cursor-pointer font-medium text-sm hover:text-black flex items-center  gap-2`}
-                onClick={() => handleDataTask(v.id)}
+              <p
+                className={`${
+                  isError ? "py-2 px-6" : "p-0"
+                } text-sm bg-red-500 text-base-100 font-semibold text-center`}
               >
-                <p>{v.name}</p>
-              </div>
-            ))}
-          </div>
+                {isError && message}
+              </p>
+              {data?.projects?.map((v: { name: string; id: number }) => (
+                <div
+                  key={v.id}
+                  className={`py-3 px-6  ${
+                    v.id === currentId
+                      ? "bg-zinc-100 text-black "
+                      : "bg-base-100 text-zinc-500 "
+                  } cursor-pointer font-medium text-sm hover:text-black flex items-center  gap-2`}
+                  onClick={() => handleDataTask(v.id)}
+                >
+                  <p>{v.name}</p>
+                </div>
+              ))}
+            </div>
           )}
         </div>
-
-        <div className=" p-4 relative  col-span-4 w-full min-h-[745px] ">
+        <div className=" p-4  relative  col-span-4 w-full  min-h-[560px] lg:min-h-[745px] ">
+ 
+       <div className="absolute z-[5] left-0 top-2 blcok lg:hidden border-b w-full">
+            <label
+              htmlFor="my-drawer"
+              className="btn bg-transparent border-none shadow-none "
+            >
+              <p className="p-2  bg-primary/90 rounded text-white">
+                <GiHamburgerMenu />
+              </p>
+            </label>
+      
+       </div>
           {loadTask ? (
-          <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
               <div className="skeleton h-6 w-full"></div>
               <div className="skeleton h-6 w-full"></div>
               <div className="skeleton h-6 w-full"></div>
-          </div>
+            </div>
           ) : (
-            <Task 
-            refreshTask={refreshTask}
-            setCurrentTask={setCurrentTask}
-            currentTask={currentTask}
-            message={messageUpdate} loading={loadUpdate} updateAction={updateAction} updateStatus={updateStatus} task={dataTask} msg={msg}  />
+            <div className="z-[8]">
+              <Task
+              refreshTask={refreshTask}
+              setCurrentTask={setCurrentTask}
+              currentTask={currentTask}
+              message={messageUpdate}
+              loading={loadUpdate}
+              updateAction={updateAction}
+              updateStatus={updateStatus}
+              task={dataTask}
+              msg={msg}
+              role={user.role}
+            />
+            </div>
           )}
 
-          <div
-            className="w-10 h-10 flex hover:bg-primary cursor-pointer items-center justify-center absolute bottom-7 right-7  rounded-md  bg-primary/90 "
-            onClick={() => handleOpenProject(true)}
-          >
-            <p className="text-center text-base-100">
-              {" "}
-              <FaPlus />
-            </p>
-          </div>
+          {msg !== "Akses tidak diizinkan" && (
+            <div
+              className="lg:w-10 lg:h-10 w-8 h-8 flex hover:bg-primary cursor-pointer items-center justify-center absolute bottom-4 right-4 lg:bottom-7 lg:right-7  rounded-md  bg-primary/90 "
+              onClick={() => handleOpenProject(true)}
+            >
+              <p className="text-center text-sm lg:text-base text-base-100">
+                {" "}
+                <FaPlus />
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

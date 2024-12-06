@@ -20,9 +20,10 @@ type Props = {
   message: string
   isError: boolean
   msg:string
+  loading: boolean
 };
 
-export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: Props) {
+export function AddEmploye({loading, msg, setIsAdd, handleEmployee, message, isError  }: Props) {
   const [forms, setForms] = useState<TEmployee>({
     email: "",
     password: "",
@@ -58,21 +59,21 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
   return (
     <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-xl shadow-xl">
-        <div className="px-6 pb-8 pt-12 relative">
+        <div className="px-4 lg:px-6 lg:pb-8 pb-4 pt-12 relative">
           {/* Header */}
-          <div className=" mb-2 flex gap-1 px-2">
+          <div className=" lg:mb-2 flex gap-1 px-2">
             <p className="-rotate-12 text-lg">
               <ImFlag />
             </p>
-            <div className="flex flex-col  gap-1">
-              <h2 className="text-xl font-semibold">Add Employee</h2>
-              <p className="text-gray-600 text-sm mb-6">
+            <div className="flex flex-col lg:gap-1">
+              <h2 className="lg:text-xl text-base font-semibold">Add Employee</h2>
+              <p className="text-gray-600 text-sm lg:mb-6 mb-4">
                 Create New Employee or User
               </p>
             </div>
           </div>
           <div
-            className="px-3 bg-black/10 absolute rounded-full right-4 top-3 text-zinc-700 hover:bg-black/20 cursor-pointer"
+            className="px-3 bg-black/10 absolute rounded-full lg:right-4 lg:top-3 right-2 top-2  text-zinc-700 hover:bg-black/20 cursor-pointer"
             onClick={handleCLose}
           >
             <p className="text-xl text-center mb-1 flex justify-center w-full h-full items-center text-">
@@ -83,21 +84,21 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
           {/* Form */}
           <div
           className={`transition-all   ease-in-out   rounded-sm   ${
-           msg?.length == 0 ? "h-0 " : "h-auto mb-2  py-2 px-4 "
+           msg?.length == 0  ? "h-0 " : "h-auto lg:mb-2 mb-1  py-2 px-4 "
           } ${isError ? " bg-red-600" : "bg-green-600"}`}
         >
           {message?.length != 0 && msg?.length != 0  && (
-            <p className="text-zinc-100 text-center capitalize">{isError ? message : msg}</p>
+            <p className="text-zinc-100 text-center text-sm lg:text-base capitalize">{isError ? message : msg}</p>
           )}
         </div>
           
-          <form className="space-y-4" onSubmit={onSubmit}>
+          <form className="lg:space-y-4 space-y-2" onSubmit={onSubmit}>
             <div>
               <label className="block text-sm  font-medium text-black mb-1">
                 Email<span className="text-red-500"> *</span>
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-[12px] text-xl text-gray-500">
+                <span className="absolute left-2 lg:left-3 top-[12px] lg:text-xl text-base text-gray-500">
                   <MdEmail />
                 </span>
                 <input
@@ -106,18 +107,18 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
                   onChange={handleChange}
                   type="email"
                   placeholder="e.g @gmail.com"
-                  className="w-full pl-10 pr-5 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                  className="w-full pl-8 lg:pl-10 pr-5 text-sm lg:text-base py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2 lg:gap-4">
               <div>
                 <label className="block text-sm  font-medium text-black mb-1">
                   Password<span className="text-red-500"> *</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-[12px] w-3 h-3 text-gray-500">
+                  <span className="absolute left-2 lg:left-3 top-[12px] lg:text-lg text-sm text-gray-500">
                     <FaLock />
                   </span>
                   <input
@@ -126,7 +127,7 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
                     onChange={handleChange}
                     type="password"
                     placeholder="make sure secret"
-                    className="w-full pl-9 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    className="w-full pl-8 lg:pl-10 pr-4 py-2 border text-sm lg:text-base placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
@@ -135,7 +136,7 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
                   Repeat Password<span className="text-red-500"> *</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-[12px] w-3 h-3 text-gray-500">
+                  <span className="absolute left-2 lg:left-3 top-[12px] lg:text-lg text-sm text-gray-500">
                     <FaLock />
                   </span>
                   <input
@@ -144,19 +145,19 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
                     onChange={handleChange}
                     type="password"
                     placeholder="make sure secret"
-                    className="w-full pl-9 placeholder:text-sm pr-4 py-2 border border-gray-300 rounded-md focus:border-primary"
+                    className="w-full pl-8 lg:pl-10 pr-4 placeholder:text-sm  text-sm lg:text-base py-2 border border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-2 lg:gap-4">
               <div>
                 <label className="block text-sm  font-medium text-black mb-1">
                   Full Name<span className="text-red-500"> *</span>
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-[12px] w-3 h-3 text-gray-500">
+                  <span className="absolute left-2 lg:left-3 top-[12px] lg:text-lg text-sm text-gray-500">
                     <FaUser />
                   </span>
                   <input
@@ -165,7 +166,7 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
                     onChange={handleChange}
                     type="text"
                     placeholder="Enter Username"
-                    className="w-full pl-9 pr-4 py-2 border placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
+                    className="w-full pl-8 lg:pl-10 pr-4 py-2 border text-sm lg:text-base placeholder:text-sm  border-gray-300 rounded-md focus:border-primary"
                   />
                 </div>
               </div>
@@ -178,7 +179,7 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
                   value={forms.role}
                   onChange={handleChange}
                   name="role"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-primary"
+                  className="w-full px-3 py-2 border text-sm lg:text-base border-gray-300 rounded-md focus:border-primary"
                 >
                   <option value="Hr">hr</option>
                   <option value="karyawan">Karyawan</option>
@@ -194,9 +195,9 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
                 name="address"
                 value={forms.address}
                 onChange={handleChange}
-                rows={4}
+                rows={2}
                 placeholder="e.g. you can add province, city and current address"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md  focus:border-primary "
+                className="w-full px-3 py-2 text-sm lg:text-base placeholder:text-sm border border-gray-300 rounded-md  focus:border-primary "
               />
               <div className="text-sm text-gray-500 ">100 characters left</div>
             </div>
@@ -204,14 +205,14 @@ export function AddEmploye({msg, setIsAdd, handleEmployee, message, isError  }: 
             <button
             type="submit"
           
-              className="px-4 py-2 text-black w-full border-2 rounded border-zinc-500 hover:bg-primary hover:text-base-100"
+              className="px-4 py-2 text-black text-sm lg:text-base w-full border-2 rounded border-zinc-500 hover:bg-primary hover:text-base-100"
               onClick={handleCLose}
             >
               Back
             </button>
             <button
-              disabled={validate} 
-            type="submit" className="px-4 py-2 disabled:bg-zinc-500 bg-primary w-full border text-white rounded-md hover:bg-primary/90 focus:ring-offset-2">
+              disabled={validate || loading} 
+            type="submit" className="px-4 py-2 text-sm lg:text-base disabled:bg-zinc-500 bg-primary w-full border text-white rounded-md hover:bg-primary/90 focus:ring-offset-2">
               Add employee
             </button>
           </div>

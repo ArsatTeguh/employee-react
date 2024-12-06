@@ -21,6 +21,7 @@ export const Login = () => {
     event.preventDefault();
     setLoading(true);
     setValid(true);
+    setMesage("")
     try {
       const res = await axios.post(
         '/auth/login',
@@ -46,12 +47,12 @@ export const Login = () => {
 
   return (
     <div className=" w-full login z-0 relative h-full bg-black">
-      <div className="z-10 text-white w-full h-full flex lg:px-20 px-10 items-center">
+      <div className="z-10 text-white w-full h-full flex lg:px-20 px-4 items-center">
         <div className="flex flex-col ">
-          <div className="flex flex-col gap-2 pb-10">
-            <p className="text-2xl font-semibold ">PT LOREM</p>
-            <p className="text-4xl font-semibold">Login Your Account</p>
-            <p className="pt-2">
+          <div className="flex flex-col lg:gap-2 pb-10">
+            <p className="text-xl lg:text-2xl font-semibold ">PT LOREM</p>
+            <p className="text-3xl lg:text-4xl font-semibold">Login Your Account</p>
+            <p className="lg:pt-2 pt-3 text-md lg:text-base">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Provident, ad.
             </p>
@@ -61,34 +62,34 @@ export const Login = () => {
               valid ? "h-0 " : "h-auto  py-2 px-4 "
             }`}
           >
-            {!valid && <p className="text-zinc-100">{message}</p>}
+            {!valid && <p className="text-zinc-100 text-md lg:text-base">{message}</p>}
           </div>
           <form className="flex flex-col gap-6 pt-4" onSubmit={Onsubmit}>
             <div className="relative flex flex-col gap-2 w-full h-full">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" className="text-md lg:text-base">Email</label>
               <input
                 onChange={(e) => onEmail(e.target.value)}
                 type="email"
-                className="rounded  py-2 pl-12 text-blue-950"
+                className="rounded  py-2  pl-12 text-blue-950"
               />
-              <span className="absolute top-[1rem] flex justify-center h-full text-2xl  items-center ml-3 text-blue-950">
+              <span className="absolute top-[1rem] flex justify-center h-full lg:text-2xl text-xl  items-center ml-3 text-blue-950">
                 <MdEmail />
               </span>
             </div>
 
             <div className="relative flex flex-col gap-2 w-full h-full ">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password" className="text-md lg:text-base">Password</label>
               <input
                 onChange={(e) => onPassword(e.target.value)}
                 type={isHidden ? "text" : "password"}
-                className="rounded py-2 pl-12 text-blue-950"
+                className="rounded  py-2 pl-12 text-blue-950"
               />
-              <span className="absolute flex justify-center h-full text-xl top-[1rem] items-center ml-3 text-blue-950">
+              <span className="absolute flex justify-center h-full lg:text-xl top-[1rem] items-center ml-3 text-blue-950">
                 <FaLock />
               </span>
               <span
                 onClick={onHidden}
-                className="absolute  h-full text-xl top-[1rem]  right-3 flex items-center hover:text-blue-500 cursor-pointer  text-blue-950"
+                className="absolute  h-full lg:text-xl top-[1rem]  right-3 flex items-center hover:text-blue-500 cursor-pointer  text-blue-950"
               >
                 {isHidden ? <FaEye /> : <FaEyeSlash />}
               </span>
@@ -99,7 +100,7 @@ export const Login = () => {
                   ? true
                   : false
               }
-              className={`flex justify-center items-center gap-2 bg-blue-900 rounded py-2 hover:bg-blue-950 transition-all ease-in-out disabled:bg-zinc-600 disabled:text-zinc-200 `}
+              className={`flex justify-center font-medium items-center gap-2 bg-blue-900 rounded py-2 text-base hover:bg-blue-950 transition-all ease-in-out disabled:bg-zinc-600 disabled:text-zinc-200 `}
             >
               {loading && <span className="block loader" />}
               {loading ? "Loading" : "Login"}

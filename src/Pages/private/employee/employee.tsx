@@ -17,21 +17,28 @@ export function Employee() {
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [isDelete, setIsDelete] = useState<boolean>(false);
+  const [reload, setReload] = useState(0)
   const [currentId, setCurrentId] = useState<number>(0);
   const [currentSearch, setCurrenSearch] = useState("");
   const [isAdd, setIsAdd] = useState<boolean>(false);
   const [msg, setSmg] = useState("")
 
   const { data, loading, onFetch, message, isError, setMesage, setIsError } = UseFetch();
+  const { onFetch:deleteFetch} = UseFetch();
 
   const onSearch = (searchQuery: string) => {
     setCurrenSearch(searchQuery);
   };
 
   const handleEmployee = (v: TEmployee) => {
+    setMesage("")
+    setSmg("")
+    setIsError(false)
     onFetch({method: 'POST', url:"/auth/register", payload: v}).then(() => {
       setSmg("Insert data")
+      setReload(prev => prev +1)
     }).catch((e) => setSmg(e.message) )
+
   };
 
   const handleOpenProject = (condition: boolean) => {
@@ -51,8 +58,9 @@ export function Employee() {
   };
 
   const onDelete = () => {
-    onFetch({ method: "DELETE", url: "/project/" + currentId }).then(() => {
-      window.location.reload();
+    deleteFetch({ method: "DELETE", url: `/employee-delete/${currentId}`}).then(() => {
+      setReload(prev => prev +1)
+      setIsDelete(false)
     });
   };
 
@@ -77,17 +85,17 @@ export function Employee() {
     })
       .then(() => {})
       .catch((e) => console.log(e));
-  }, [currentSearch, page]);
+  }, [currentSearch, page, reload]);
 
   return (
-    <div className="w-full p-8  lg:min-h-[745px] ">
+    <div className="w-full p-4 lg:p-8 min-h-[560px]  lg:min-h-[745px] ">
    
       {isDelete && (
         <ConfirmationPopup submit={onDelete} setIsDelete={setIsDelete} />
       )}
-      {isAdd && <AddEmploye setIsAdd={handleOpenProject} handleEmployee={handleEmployee} message={message} isError={isError} msg={msg} />}
-      <div className="flex flex-col pb-8 gap-2 justify-center items-center">
-        <p className="text-3xl font-semibold">Employees Data</p>
+      {isAdd && <AddEmploye loading={loading} setIsAdd={handleOpenProject} handleEmployee={handleEmployee} message={message} isError={isError} msg={msg} />}
+      <div className="flex flex-col pb-8 gap-1 lg:gap-2 justify-center items-center">
+        <p className="lg:text-3xl text-2xl font-semibold">Employees Data</p>
         <p className=" lg:w-1/2 text-center text-zinc-500 text-sm">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem
           accusamus consequuntur error quas. Odio optio doloremque non hic
@@ -106,15 +114,15 @@ export function Employee() {
         setSearchQuery={setSearchQuery}
       />
       <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
-        <div className="flex gap-4 ">
+        <div className="flex gap-1 lg:gap-2 ">
           <button
             className="rounded border px-6 py-2 hover:bg-primary hover:text-white  text-sm  m-0 "
             onClick={() => handlePage("previous")}
           >
             Previous
           </button>
-          <div className="flex justify-center items-center">
-            <p className="text-lg font-semibold">{data?.page}</p>
+          <div className="flex justify-center items-center ">
+            <p className="text-sm lg:text-lg font-medium px-4 text-zinc-700 lg:px-5 py-2 rounded-full bg-zinc-100">{data?.page}</p>
           </div>
           <button
             className="rounded border px-8 py-2 hover:bg-primary hover:text-white  text-sm  m-0 "

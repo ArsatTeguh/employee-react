@@ -31,13 +31,13 @@ export function EmpProject() {
   }, []);
 
   return (
-    <div className="flex  gap-2 w-full">
+    <div className="flex pb-5  gap-2 w-full">
       {loading
         ? Array(3)
             .fill(null)
             .map((_, i) => (
               <div
-                className="w-full h-24 block bg-zinc-300 rounded animate-pulse"
+                className="w-full h-4 lg:h-24 block bg-zinc-300 rounded animate-pulse"
                 key={i}
               ></div>
             ))
@@ -47,7 +47,7 @@ export function EmpProject() {
                 {/* head */}
                 <thead>
                   <tr>
-                    <th></th>
+                    <th>No</th>
                     <th>Position</th>
                     <th>Project</th>
                     <th>Duration</th>
@@ -56,10 +56,10 @@ export function EmpProject() {
                 <tbody>
                   {data?.map((v: TypeDataPosition, index: number) => (
                     <tr tabIndex={index}>
-                      <th>{index + 1}</th>
-                      <td>{v.status}</td>
-                      <td>{v.project.name}</td>
-                      <td>{v.project.Estimation}</td>
+                      <td className="whitespace-nowrap" >{index + 1}</td  >
+                      <td className="whitespace-nowrap">{v.status}</td>
+                      <td className="whitespace-nowrap">{v.project.name}</td>
+                      <td className="whitespace-nowrap">{v.project.Estimation}</td>
                     </tr>
                   ))}
                 </tbody>

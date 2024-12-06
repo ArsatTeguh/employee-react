@@ -19,7 +19,7 @@ export function CurrentUser() {
     const user = {
       id: decoded.id,
       email: decoded.email,
-      role: decoded.role, // hr | karyawan
+      role: decoded.role,
     };
   return {user}
 }

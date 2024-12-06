@@ -81,15 +81,7 @@ input::file-selector-button {
   }
 }
 
-.card-svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: white url("/bintik.png") 100% / auto auto no-repeat;
-  border-radius: 6px;
-}
+
 
 .login {
   background: url("/bg-login.jpg");

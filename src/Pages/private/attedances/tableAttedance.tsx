@@ -1,6 +1,7 @@
 import OnRouter from "../../../Common/onRouter";
 import { FormatDateTime, GetCurrentYear } from "../../../Common/sortDate";
 import { AiOutlineScan } from "react-icons/ai";
+import { IoInformationCircleOutline } from "react-icons/io5";
 
 const month = [
   { value: "01", month: "January" },
@@ -24,7 +25,6 @@ const thead = [
   "project",
   "location",
   "working Hours",
-  "",
 ];
 
 type Props = {
@@ -44,16 +44,16 @@ export function TableAten({message, searchQuery, handleChange, data, loading }: 
 
   return (
     <div className="">
-      <header className=" space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-0 xl:py-2">
-        <div className="flex items-center justify-end">
+      <header className=" space-y-4 py-2 px-0 sm:px-8 sm:py-6 lg:p-4 xl:px-0 xl:py-2">
+        <div className="flex items-center justify-end pb-4 lg:pb-0">
           <div
-            className=" cursor-pointer  flex gap-2 bg-primary/90  items-center rounded-md text-base-100 text-sm font-medium px-4 py-2 lg:px-6 lg:py-3 "
+            className=" cursor-pointer  flex gap-2 bg-primary/90  items-center rounded text-base-100 text-sm font-medium px-4 py-2 lg:px-6 lg:py-3 "
             onClick={() => router("/attedance")}
           >
-            <p className="lg:text-lg">
+            <p className="text-lg">
               <AiOutlineScan />
             </p>
-            <p> Attedance</p>
+            <p className="text-sm lg:text-base text-base-100"> Attedance</p>
           </div>
         </div>
         <div className="flex items-center gap-2 lg:gap-6">
@@ -62,7 +62,7 @@ export function TableAten({message, searchQuery, handleChange, data, loading }: 
               value={searchQuery.month}
               name="month"
               onChange={handleChange}
-              className="select select-sm lg:select-md select-bordered focus:outline-none  focus:border-[1px] rounded focus:scale-100 w-full max-w-xs"
+              className="select select-sm lg:select-md select-bordered focus:outline-none  focus:border-[1px] rounded focus:scale-100 w-full lg:max-w-xs"
             >
               {month.map((v, i: number) => (
                 <option key={i} value={v.value}>
@@ -76,7 +76,7 @@ export function TableAten({message, searchQuery, handleChange, data, loading }: 
               value={searchQuery.year}
               name="year"
               onChange={handleChange}
-              className="select select-sm lg:select-md select-bordered focus:outline-none  focus:border-[1px] rounded focus:scale-100 w-full max-w-xs"
+              className="select select-sm lg:select-md select-bordered focus:outline-none  focus:border-[1px] rounded focus:scale-100 w-full lg:max-w-xs"
             >
               {Array(3)
                 .fill(null)
@@ -89,12 +89,12 @@ export function TableAten({message, searchQuery, handleChange, data, loading }: 
           </div>
         </div>
       </header>
-      <div className="mb-2 ml-4 lg:ml-0 ">
+      <div className="pb-2 flex gap-1">
         <select
           value={searchQuery.limit}
           name="limit"
           onChange={handleChange}
-          className="select select-sm  lg:select-md select-bordered focus:outline-none  focus:border-[1px] rounded focus:scale-100  max-w-xs"
+          className="select select-sm  lg:select-md select-bordered focus:outline-none  focus:border-[1px] rounded focus:scale-100  lg:max-w-xs"
         >
           {Array(3)
             .fill(null)
@@ -104,6 +104,11 @@ export function TableAten({message, searchQuery, handleChange, data, loading }: 
               </option>
             ))}
         </select>
+        <div className="lg:tooltip" data-tip="Total list to be returned">
+              <span className="text-lg">
+              <IoInformationCircleOutline />
+              </span>
+            </div>
       </div>
       <div className="overflow-x-auto w-full  lg:min-h-[300px]  ">
         <div className=" w-full    py-5 lg:py-0">
@@ -127,33 +132,30 @@ export function TableAten({message, searchQuery, handleChange, data, loading }: 
                     .map((_, index: number) => (
                       <tr className="" key={index}>
                         <td>
-                          <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                          <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                         </td>
                         <td>
-                          <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                          <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                         </td>
                         <td>
-                          <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                          <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                         </td>
                         <td>
-                          <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                          <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                         </td>
                         <td>
-                          <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                          <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                         </td>
                         <td>
-                          <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
-                        </td>
-                        <td>
-                          <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                          <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                         </td>
                       </tr>
                     ))
                 : message === "Data empty" ? (
                   <tr className="relative">
-                     <div className="absolute flex justify-center w-full p-4">
-                      <p className="text-zinc-300 text-xl">No Record</p>
-                     </div>
+                <div className=" absolute w-full py-5  flex justify-center items-center">
+                  <p className="text-xl text-zinc-300">No Record</p>
+                </div>
                       </tr>
                 )
                   : 

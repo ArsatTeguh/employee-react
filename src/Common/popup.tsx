@@ -17,14 +17,12 @@ type TypeProject = {
   name: string;
   Estimation: string;
   status: string;
-  position: [];
 };
+
 type TypeEmployee = {
-  employees: Array<{
-    id: number;
-    name: string;
-    status: string;
-  }>;
+  id: number;
+  name: string;
+  status: string;
 };
 
 function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
@@ -32,7 +30,7 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
   const [selectData, setSelectData] = useState<any>({});
   const [search, setSearch] = useState("");
   const [projects, setProjects] = useState<Array<TypeProject> | null>(null);
-  const [employees, setEmployee] = useState<TypeEmployee | null>(null);
+  const [employees, setEmployee] = useState<TypeEmployee[] | null>(null);
 
   const { loading, onFetch } = UseFetch();
 
@@ -41,13 +39,13 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
       setSelect(current);
 
       if (projects === null && current === "projects") {
-        onFetch({ method: "GET", url: "/" + current }).then((res) =>
-          setProjects(res?.projects)
+        onFetch({ method: "GET", url: "/project-popup"}).then((res) =>
+          setProjects(res)
         );
       }
 
       if (employees === null && current === "employees") {
-        onFetch({ method: "GET", url: "/" + current }).then((res) =>
+        onFetch({ method: "GET", url: "/employee-popup"}).then((res) =>
           setEmployee(res)
         );
       }
@@ -77,9 +75,9 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-20">
-      <div className=" h-[70%] lg:w-1/3 w-10/12 relative bg-zinc-100 text-black rounded-md ">
-      <div className="px-3 bg-black/10 absolute rounded-full right-4 top-3 text-zinc-700 hover:bg-black/20 cursor-pointer"
+    <div className="fixed inset-0 flex lg:items-center justify-center bg-black/50 z-20 p-4">
+      <div className=" lg:h-[70%] h-[83%] max-w-xl relative bg-zinc-100 text-black rounded-md ">
+      <div className="px-3 bg-black/10 absolute rounded-full lg:right-4 lg:top-3 right-2 top-2  text-zinc-700 hover:bg-black/20 cursor-pointer"
           onClick={onClose}
           >
             <p className="text-xl text-center mb-1 flex justify-center w-full h-full items-center text-">
@@ -87,23 +85,23 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
             </p>
           </div>
       <div className="pb-10 pt-12 flex flex-col items-center">
-      <p className="text-center font-semibold text-black text-2xl ">
+      <p className="text-center font-semibold text-black text-xl lg:text-2xl ">
           Master Data
         </p>
-        <p className="text-center text-sm text-zinc-500 w-10/12">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, quasi.</p>
+        <p className="text-center text-xs lg:text-sm text-zinc-500 w-10/12">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae, quasi.</p>
       </div>
         {select == "projects" && disable != "projects" ? (
           <div className=" gap-2 flex flex-col h-[43vh] ">
             <div
-              className="flex items-center  w-1/4 gap-1 cursor-pointer   px-6"
+              className="flex items-center  w-1/4 lg:gap-1 cursor-pointer  px-4 lg:px-6"
               onClick={() => onBack("")}
             >
-              <p className="text-xl">
+              <p className="lg:text-xl">
                 <IoIosArrowBack />
               </p>
-              <p className="font-semibold">Menu</p>
+              <p className="font-medium lg:text-base text-sm">Menu</p>
             </div>
-            <div className="px-6 border-b-2 mt-4 pb-2 relative">
+            <div className="px-4 lg:px-6 border-b-2 mt-4 pb-2 relative">
               <input
                 value={search}
                 type="text"
@@ -111,11 +109,11 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
                 placeholder="Search Name"
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <span className="absolute text-2xl right-7 text-zinc-500 top-[.5rem]">
+              <span className="absolute lg:text-2xl text-xl right-7  text-zinc-500 top-[.5rem]">
                 <IoMdSearch />
               </span>
             </div>
-            <div className=" overflow-y-auto  flex flex-col bg-zinc-200 gap-1 px-6 py-2">
+            <div className=" overflow-y-auto  flex flex-col bg-zinc-200 gap-1 px-4 lg:px-6 py-2">
               {loading
                 ? Array(3)
                     .fill(null)
@@ -146,9 +144,9 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
                           <p className=" text-sm text-zinc-500">{v.status}</p>
                         </div>
 
-                        <p className="text-sm flex items-center gap-1 text-zinc-600">
+                        {/* <p className="text-sm flex items-center gap-1 text-zinc-600">
                           {v.position?.length} <span className="text-xl"><RiEmpathizeFill /></span>
-                        </p>
+                        </p> */}
                       </div>
                     ))}
             </div>
@@ -186,7 +184,7 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
                         key={i}
                       />
                     ))
-                : employees?.employees
+                : employees
                     ?.filter((e: any) =>
                       search
                         ? e.name.toLowerCase().includes(search.toLowerCase())
@@ -222,12 +220,12 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
               onClick={() => onSelect("employees")}
             >
               <div className="flex items-center gap-2">
-                <p className="text-2xl">
+                <p className="lg:text-2xl text-xl">
                   <RiEmpathizeFill />
                 </p>
-                <p className="font-semibold">Employees</p>
+                <p className="font-medium lg:text-base text-sm">Employees</p>
               </div>
-              <span className="text-xl">
+              <span className="lg:text-xl">
                 <IoIosArrowForward />
               </span>
             </div>
@@ -240,12 +238,12 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
               onClick={() => onSelect("projects")}
             >
               <div className="flex items-center gap-2">
-                <p className="text-2xl">
+                <p className="lg:text-2xl text-xl">
                   <PiProjectorScreenFill />
                 </p>
-                <p className="font-semibold">Projects</p>
+                <p className="font-medium lg:text-base text-sm">Projects</p>
               </div>
-              <span className="text-xl">
+              <span className="lg:text-xl">
                 <IoIosArrowForward />
               </span>
             </div>
@@ -253,7 +251,7 @@ function Popup({ disable, onChange, setPopup, currentPopup }: Props) {
         )}
         <button
           disabled={selectData.id == null}
-          className="bg-primary/90 hover:bg-primary px-8 py-2 disabled:bg-primary/50 rounded text-white text-sm absolute bottom-5 right-5"
+          className="bg-primary/90  hover:bg-primary px-8 py-2 disabled:bg-primary/50 rounded text-white text-sm absolute bottom-5 right-5"
           onClick={onReturn}
         >
           Return
