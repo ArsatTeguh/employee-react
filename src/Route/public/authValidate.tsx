@@ -6,7 +6,7 @@ export const ValidateAuth = () => {
 
   return (
     <>
-    {!token ? <Outlet /> : <Navigate to={`/master`} />}
+    {!token ? <Outlet /> : <Navigate to={`/attedance`} />}
     </>
   )
 };

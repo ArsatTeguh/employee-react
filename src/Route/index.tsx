@@ -4,11 +4,12 @@ import { PrivateRoutes, PrivateRoutesHome, ValidatePrivate } from "./private";
 import { AuthRoutes, ValidateAuth } from "./public";
 import NotFound from "../Components/notFound";
 import { EmployyeeById } from "../Pages/private";
+import { GlobalLoading } from "../Common/loading";
 
 const Routers = () => {
   return (
     <BrowserRouter basename={"/"}>
-      <Suspense fallback={"loading"}>
+      <Suspense fallback={<GlobalLoading />}>
         <Routes>
           <Route path="/" element={<ValidateAuth />}>
             {AuthRoutes.map(({ path, component }, i) => (

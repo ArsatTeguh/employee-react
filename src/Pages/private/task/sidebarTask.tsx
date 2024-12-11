@@ -206,7 +206,7 @@ export function SidebarTask() {
             <p className="font-semibold ">Projects</p>
           </div>
           {loading ? (
-            <div className="p-4 flex flex-col gap-2">
+            <div className="p-4 px-4 flex flex-col gap-2">
               <div className="skeleton h-4 w-full"></div>
               <div className="skeleton h-4 w-full"></div>
               <div className="skeleton h-4 w-full"></div>
@@ -250,7 +250,7 @@ export function SidebarTask() {
       
        </div>
           {loadTask ? (
-            <div className="flex flex-col gap-2">
+            <div className="flex pt-14 lg:pt-0 flex-col gap-2">
               <div className="skeleton h-6 w-full"></div>
               <div className="skeleton h-6 w-full"></div>
               <div className="skeleton h-6 w-full"></div>

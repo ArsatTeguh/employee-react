@@ -1,5 +1,4 @@
 import { FaCheckSquare, FaTrash } from "react-icons/fa";
-import { FiInbox } from "react-icons/fi";
 import { IoMdMore } from "react-icons/io";
 
 const thead = [

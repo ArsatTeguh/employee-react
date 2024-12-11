@@ -5,15 +5,6 @@ type TypeIntial = {
   id_employee: {name: string, id: number|null};
 };
 
-type TEmployee = {
-  email: string;
-  password: string;
-  repeat_password: string;
-  address: string;
-  name: string;
-  role: "hr" | "karyawan";
-};
-
 export const hasEmptyField = (positions: TypeIntial[]) => {
   return positions.some(
     (position) =>

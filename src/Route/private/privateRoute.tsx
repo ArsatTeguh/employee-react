@@ -1,13 +1,68 @@
-import { EmpLeave } from "../../Common/empLeave";
-import { EmpPayroll, EmpProject, Profile } from "../../Components";
-import { EmpAttedance } from "../../Components/empAttedance";
+import { lazy } from "react";
 import { HandleError } from "../../Components/handleError";
-
-
 import NotFound from "../../Components/notFound";
-import { Attedances, AttedancesList,  Employee, EmployeeById, Leave, LeaveNon, ProjectById, ProjectList } from "../../Pages/private";
-import { Payroll } from "../../Pages/private/payroll/payroll";
-import { SidebarTask } from "../../Pages/private/task/sidebarTask";
+
+const createLazyImports = (
+  importFn: () => Promise<{ [key: string]: React.ComponentType<any> }>,
+  componentNames: string[]
+) => {
+  return componentNames.reduce((acc, name) => {
+    acc[name] = lazy(() =>
+      importFn().then((module) => ({ default: module[name] }))
+    );
+    return acc;
+  }, {} as { [key: string]: React.LazyExoticComponent<React.ComponentType<any>> });
+};
+
+const {
+  EmpLeave
+} = createLazyImports(
+  () => import("../../Common/empLeave"),
+  ["EmpLeave"]
+);
+
+const {
+  EmpAttedance
+} = createLazyImports(
+  () => import("../../Components/empAttedance"),
+  ["EmpAttedance"]
+);
+
+const {
+  Payroll
+} = createLazyImports(
+  () => import("../../Pages/private/payroll/payroll"),
+  ["Payroll"]
+);
+
+const {
+  SidebarTask
+} = createLazyImports(
+  () => import("../../Pages/private/task/sidebarTask"),
+  ["SidebarTask"]
+);
+
+const {
+  EmpPayroll, EmpProject, Profile
+} = createLazyImports(
+  () => import("../../Components"),
+  ["EmpPayroll", "EmpProject", "Profile",]
+);
+
+const {
+  Attedances,
+  AttedancesList,
+  Employee,
+  EmployeeById,
+  Leave,
+  LeaveNon,
+  ProjectById,
+  ProjectList,
+} = createLazyImports(
+  () => import("../../Pages/private"),
+  ["Attedances", "AttedancesList", "Employee", "EmployeeById", "Leave", "LeaveNon","ProjectById","ProjectList"]
+);
+
 
 export const PrivateRoutes: Iroute[] = [
   { path: `/project`, component: <ProjectList />, role: "hr" },
@@ -25,9 +80,34 @@ export const PrivateRoutes: Iroute[] = [
 ];
 
 export const PrivateRoutesHome = [
-  { path: `/wallet/:id`, component: <Profile /> , role: "hr", strict:"/employee/wallet/:id"},
-  { path: `/project/:id`, component: <EmpProject /> , role: "hr",strict:"/employee/project/:id"},
-  { path: `/payroll/:id`, component: <EmpPayroll /> , role: "hr",strict:"/employee/payroll/:id"},
-  { path: `/attedance/:id`, component: <EmpAttedance /> , role: "hr",strict:"/employee/attedance/:id"},
-  { path: `/leave/:id`, component: <EmpLeave /> , role: "hr",strict:"/employee/leave/:id"},
-]
+  {
+    path: `/wallet/:id`,
+    component: <Profile />,
+    role: "hr",
+    strict: "/employee/wallet/:id",
+  },
+  {
+    path: `/project/:id`,
+    component: <EmpProject />,
+    role: "hr",
+    strict: "/employee/project/:id",
+  },
+  {
+    path: `/payroll/:id`,
+    component: <EmpPayroll />,
+    role: "hr",
+    strict: "/employee/payroll/:id",
+  },
+  {
+    path: `/attedance/:id`,
+    component: <EmpAttedance />,
+    role: "hr",
+    strict: "/employee/attedance/:id",
+  },
+  {
+    path: `/leave/:id`,
+    component: <EmpLeave />,
+    role: "hr",
+    strict: "/employee/leave/:id",
+  },
+];

@@ -1,8 +1,6 @@
 import { FaInbox } from "react-icons/fa";
 
-type Props = {}
-
-export default function NotFound({}: Props) {
+export default function NotFound() {
   return (
     <div className="flex w-full flex-col lg:gap-4 gap-0  h-full justify-center items-center">
         <p className="md:text-4xl lg:text-2xl text-xl   py-4 lg:px-10 px-5  rounded-sm  font-semibold text-zinc-200">Opppsss, Sory Page Not Found</p>

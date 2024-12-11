@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { UseFetch } from "../../../Common/useFetch";
-import {
-  FormatDate,
-  GetCurrentMonthWithZero,
-  GetCurrentYear,
-} from "../../../Common/sortDate";
-import { TablePayroll } from "./payrollTable";
-import Popup from "../../../Common/popup";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Popup from "../../../Common/popup";
+import {
+  GetCurrentMonthWithZero,
+  GetCurrentYear
+} from "../../../Common/sortDate";
+import { UseFetch } from "../../../Common/useFetch";
+import { TablePayroll } from "./payrollTable";
 
 type TypeSearch = {
   month: string;

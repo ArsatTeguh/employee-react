@@ -200,34 +200,34 @@ export function TablePayroll({
                   .map((_, index: number) => (
                     <tr className="" key={index}>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                       <td>
-                        <span className="border block m-2 animate-pulse whitespace-nowrap px-4 py-2 bg-zinc-300 rounded-full " />
+                        <span className="border block m-1 lg:m-2 animate-pulse whitespace-nowrap px-4 py-1 lg:py-2 bg-zinc-300 rounded-full " />
                       </td>
                     </tr>
                   ))
