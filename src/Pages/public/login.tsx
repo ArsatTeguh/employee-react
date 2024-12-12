@@ -25,7 +25,10 @@ export const Login = () => {
     try {
       const res = await axios.post(
         '/auth/login',
-         { email, password }
+         { email, password },
+         {
+          withCredentials: true,
+        }
       );
       const data = res.data;
       Cookies.set("token", data.data);
