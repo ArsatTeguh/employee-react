@@ -154,7 +154,7 @@ export function SidebarTask() {
   }, []);
 
   return (
-    <div className="drawer w-full relative bg-base-100 ">
+    <div className="drawer w-full relative bg-zinc-50 ">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-side z-[6]">
         <label
@@ -162,9 +162,9 @@ export function SidebarTask() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu bg-base-100 p-0  text-base-content min-h-full w-56 ">
+        <ul className="menu bg-zinc-50 p-0  text-base-content min-h-full w-56 ">
         <div className="px-4 py-3 flex items-center border-b rounded  gap-2 ">
-            <p className=" p-2 bg-primary/90 text-base rounded-md text-base-100">
+            <p className=" p-2 bg-primary/90  rounded-md text-zinc-50">
               <PiProjectorScreen />
             </p>
             <p className="font-medium">Projects</p>
@@ -216,7 +216,7 @@ export function SidebarTask() {
               <p
                 className={`${
                   isError ? "py-2 px-6" : "p-0"
-                } text-sm bg-red-500 text-base-100 font-semibold text-center`}
+                } text-sm bg-red-500 text-zinc-50 font-semibold text-center`}
               >
                 {isError && message}
               </p>
@@ -225,8 +225,8 @@ export function SidebarTask() {
                   key={v.id}
                   className={`py-3 px-6  ${
                     v.id === currentId
-                      ? "bg-zinc-100 text-black "
-                      : "bg-base-100 text-zinc-500 "
+                      ? "bg-zinc-200 text-black "
+                      : "bg-zinc-50 text-zinc-500 "
                   } cursor-pointer font-medium text-sm hover:text-black flex items-center  gap-2`}
                   onClick={() => handleDataTask(v.id)}
                 >
@@ -277,7 +277,7 @@ export function SidebarTask() {
               className="lg:w-10 lg:h-10 w-8 h-8 flex hover:bg-primary cursor-pointer items-center justify-center absolute bottom-4 right-4 lg:bottom-7 lg:right-7  rounded-md  bg-primary/90 "
               onClick={() => handleOpenProject(true)}
             >
-              <p className="text-center text-sm lg:text-base text-base-100">
+              <p className="text-center text-sm lg:text-base text-zinc-50">
                 {" "}
                 <FaPlus />
               </p>

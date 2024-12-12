@@ -31,7 +31,7 @@ function ButtonNavbar({ image, loading, decoded }: Props) {
   };
 
   return (
-    <div className="fixed bottom-0  left-0 z-50 w-full bg-white  border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+    <div className="fixed bottom-0  left-0 z-50 w-full bg-white  border-t border-gray-200  ">
       <div
         className={`grid h-full max-w-lg ${
           decoded.role == roleRestrictedAdmin ? "grid-cols-6" : "grid-cols-5"
@@ -54,7 +54,7 @@ function ButtonNavbar({ image, loading, decoded }: Props) {
                 isPending
                   ? "bg-black"
                   : isActive
-                  ? " text-black   hover:bg-gray-100 dark:hover:bg-gray-800 group bg-base-200 "
+                  ? " text-black   hover:bg-gray-100  group bg-zinc-200 "
                   : "text-zinc-500 hover:text-black"
               }
             >

@@ -93,7 +93,7 @@ function Sidebar({image, loading, decoded }: props) {
                   isPending
                     ? "bg-black"
                     : isActive
-                    ? "font-medium  text-black  bg-base-100 "
+                    ? "font-medium  text-black  bg-white "
                     : "font-medium text-zinc-500 hover:text-black"
                 }
               >
@@ -117,7 +117,7 @@ function Sidebar({image, loading, decoded }: props) {
                   isPending
                     ? "bg-black"
                     : isActive
-                    ? "font-medium  text-black  bg-base-100 "
+                    ? "font-medium  text-black  bg-white-100 "
                     : "font-medium text-zinc-500 hover:text-black"
                 }
               >
@@ -130,7 +130,7 @@ function Sidebar({image, loading, decoded }: props) {
       </ul>
       <div className="buttom flex p-6 items-end h-full ">
         <p
-          className=" border py-2 px-8 rounded bg-primary/90 cursor-pointer hover:bg-primary text-base-100"
+          className=" border py-2 px-8 rounded bg-primary/90 cursor-pointer hover:bg-primary text-zinc-50"
           onClick={handleLogout}
         >
           Sign out

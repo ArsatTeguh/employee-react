@@ -88,7 +88,7 @@ export const ValidatePrivate = () => {
         {shouldRedirect() ? (
           <Navigate to="/attedance" />
         ) : (
-          <div className="bg-base-100 pb-14 lg:pb-0 lg:border lg:rounded-lg lg:shadow-lg">
+          <div className="bg-zinc-50 pb-14 lg:pb-0 lg:border lg:rounded-lg lg:shadow-lg">
             <Outlet />
           </div>
         )}

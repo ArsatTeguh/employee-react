@@ -105,7 +105,7 @@ export function Task({role,currentTask, setCurrentTask,refreshTask, msg, task, u
               .sort()
               .reverse()
               .map(([date, tasksForDate], index: number) => (
-                <div key={index} className={`collapse collapse-arrow ${date == currentTask.date && "collapse-open"}   relative bg-base-100 border  border-zinc-100 rounded-none`} >
+                <div key={index} className={`collapse collapse-arrow text-black ${date == currentTask.date && "collapse-open"}   relative bg-zinc-50 border  border-zinc-200 rounded-none`} >
                   <input type="checkbox" className="peer" />
 
                   <div
