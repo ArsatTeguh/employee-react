@@ -88,7 +88,7 @@ export function Employee() {
   }, [currentSearch, page, reload]);
 
   return (
-    <div className="w-full p-4 lg:p-8 min-h-[560px]  lg:min-h-[745px] ">
+    <div className="w-full p-4 lg:p-8 min-h-[560px] h-screen  lg:min-h-[745px] ">
    
       {isDelete && (
         <ConfirmationPopup submit={onDelete} setIsDelete={setIsDelete} />
@@ -113,7 +113,8 @@ export function Employee() {
         setCurrentId={setCurrentId}
         setSearchQuery={setSearchQuery}
       />
-      <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
+         {data?.page && (
+        <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
         <div className="flex gap-1 lg:gap-2 ">
           <button
             className="rounded border px-6 py-2 hover:bg-primary hover:text-white  text-sm  m-0 "
@@ -132,6 +133,7 @@ export function Employee() {
           </button>
         </div>
       </div>
+      )}
     </div>
   );
 }

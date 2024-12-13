@@ -3,7 +3,7 @@ module.exports = {
   daisyui: {
     themes: ["light"],
   },
-  darkMode: false,
+  media: false,
   content: ["./index.html", "./src/**/*.{js,ts,tsx}"],
   theme: {
     extend: {

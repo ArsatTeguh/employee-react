@@ -83,7 +83,7 @@ export function ComTable({
           />
         </form>
       </header>
-      <div className="overflow-x-auto w-full  lg:min-h-[300px]  ">
+      <div className="overflow-x-auto w-full min-h-[170px]  lg:min-h-[300px]  ">
         <div className=" w-full   lg:py-0">
           <table className="min-w-full bg-white min-h-full  border border-gray-200 ">
             <thead className="bg-primary/90 text-zinc-200">

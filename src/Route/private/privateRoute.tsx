@@ -67,7 +67,6 @@ const {
 export const PrivateRoutes: Iroute[] = [
   { path: `/project`, component: <ProjectList />, role: "hr" },
   { path: `/attedance`, component: <Attedances />, role: "karyawan" },
-  { path: `/`, component: <Attedances />, role: "karyawan" },
   { path: `/attedance-list`, component: <AttedancesList />, role: "karyawan" },
   { path: `/project/:id`, component: <ProjectById />, role: "hr" },
   { path: `/not-found`, component: <NotFound />, role: "karyawan" },

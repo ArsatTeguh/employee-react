@@ -91,7 +91,7 @@ export const ProjectList = () => {
 
 
   return (
-    <div className="w-full min-h-[550px]  lg:min-h-[745px] p-4 lg:p-8 ">
+    <div className="w-full h-screen lg:min-h-[745px] p-4 lg:p-8 ">
       {isAdd && (
         <AddProject  loading={load}  handleEmployee={handleEmployee} setIsAdd={handleOpenProject} isError={err} msg={msg} />
       )}
@@ -108,7 +108,8 @@ export const ProjectList = () => {
       </div>
 
       <ComTable setIsAdd={handleOpenProject} data={data} loading={loading} setIsDelete={setIsDelete} pathEdit="project" currentId={currentId} searchQuery={searchQuery} setCurrentId={setCurrentId} setSearchQuery={setSearchQuery} />
-      <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
+      {data?.page && (
+        <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
         <div className="flex gap-1 lg:gap-2 ">
           <button
             className="rounded border px-6 py-2 hover:bg-primary hover:text-white  text-sm  m-0 "
@@ -127,6 +128,7 @@ export const ProjectList = () => {
           </button>
         </div>
       </div>
+      )}
     </div>
   );
 };

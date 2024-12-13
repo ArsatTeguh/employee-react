@@ -98,7 +98,7 @@ export function Attedances() {
   }, [user.id]);
 
   return (
-    <div className="w-full  lg:min-h-[745px] relative p-4 lg:p-8">
+    <div className="w-full  lg:min-h-[745px]  relative p-4 lg:p-8">
       {popup && (
         <Popup
           disable="employees"

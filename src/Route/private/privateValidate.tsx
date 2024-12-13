@@ -22,14 +22,14 @@ type JwtPayload = {
 
 export const ValidatePrivate = () => {
   const token = Cookies.get("token");
-  const location = useLocation();
-  const { matches } = useMediaQuery("(max-width: 400px)");
-
-  const { data, loading, onFetch } = UseFetch();
 
   if (!token) {
     return <Navigate to={`/login`} />;
   }
+
+  const location = useLocation();
+  const { matches } = useMediaQuery("(max-width: 400px)");
+  const { data, loading, onFetch } = UseFetch();
 
   const decoded = jwtDecode<JwtPayload>(token ?? "");
 
@@ -72,6 +72,8 @@ export const ValidatePrivate = () => {
 
   useEffect(() => {
     onFetch({ method: "GET", url: `/profile/${result?.id}` });
+
+    
     return () => {};
   }, [result.id]);
 
@@ -87,7 +89,7 @@ export const ValidatePrivate = () => {
       <div className="lg:pl-64 lg:pr-3 bg-zinc-100 lg:py-3">
         {shouldRedirect() ? (
           <Navigate to="/attedance" />
-        ) : (
+        )  : (
           <div className="bg-zinc-50 pb-14 lg:pb-0 lg:border lg:rounded-lg lg:shadow-lg">
             <Outlet />
           </div>

@@ -127,8 +127,8 @@ function ButtonNavbar({ image, loading, decoded }: Props) {
                   onClick={() => router(`/profile/${decoded.id}`)}
                 >
                   <div className="flex justify-center items-center w-full h-full">
-                    <p className="capitalize text-xl">{decoded.email[0]}</p>
-                    <p className="capitalize text-xl">{decoded.email[1]}</p>
+                    <p className="capitalize text-s lg:text-xl">{decoded.email[0]}</p>
+                    <p className="capitalize text-sm lg:text-xl">{decoded.email[1]}</p>
                   </div>
                 </div>
               )}

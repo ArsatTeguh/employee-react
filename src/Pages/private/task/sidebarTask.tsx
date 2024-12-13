@@ -236,7 +236,7 @@ export function SidebarTask() {
             </div>
           )}
         </div>
-        <div className=" p-4  relative  col-span-4 w-full  min-h-[560px] lg:min-h-[745px] ">
+        <div className=" p-4  relative  col-span-4 w-full  min-h-[700px] lg:min-h-[745px] ">
  
        <div className="absolute z-[5] left-0 top-2 blcok lg:hidden border-b w-full">
             <label
@@ -274,7 +274,7 @@ export function SidebarTask() {
 
           {msg !== "Akses tidak diizinkan" && (
             <div
-              className="lg:w-10 lg:h-10 w-8 h-8 flex hover:bg-primary cursor-pointer items-center justify-center absolute bottom-4 right-4 lg:bottom-7 lg:right-7  rounded-md  bg-primary/90 "
+              className=" w-10 h-10  flex hover:bg-primary cursor-pointer items-center justify-center absolute bottom-4 right-4 lg:bottom-7 lg:right-7  rounded-md  bg-primary/90 "
               onClick={() => handleOpenProject(true)}
             >
               <p className="text-center text-sm lg:text-base text-zinc-50">

@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { PrivateRoutes, PrivateRoutesHome, ValidatePrivate } from "./private";
-import { AuthRoutes, ValidateAuth } from "./public";
+import { GlobalLoading } from "../Common/loading";
 import NotFound from "../Components/notFound";
 import { EmployyeeById } from "../Pages/private";
-import { GlobalLoading } from "../Common/loading";
+import { PrivateRoutes, PrivateRoutesHome, ValidatePrivate } from "./private";
+import { AuthRoutes, ValidateAuth } from "./public";
 
 const Routers = () => {
   return (

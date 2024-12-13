@@ -35,7 +35,7 @@ export function TableLeaveNon({setIsAdd, message, data, loading }: Props) {
           New
         </div>
       </div>
-      <div className="overflow-x-auto w-full   lg:min-h-[300px]  ">
+      <div className="overflow-x-auto w-full min-h-[170px]  lg:min-h-[300px]  ">
         <div className=" w-full    py-5 lg:py-0">
           <table className="min-w-full bg-white min-h-full relative  border border-gray-200 ">
             <thead className="bg-primary/90 text-zinc-200">

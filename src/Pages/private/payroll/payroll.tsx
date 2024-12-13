@@ -131,7 +131,7 @@ export function Payroll() {
   }, [searchQuery, page]);
 
   return (
-    <div className="w-full lg:p-8 pt-4 px-4 pb-8  lg:min-h-[745px]">
+    <div className="w-full lg:p-8 pt-4 px-4 pb-8 h-screen lg:min-h-[745px]">
       {popup && (
         <Popup
           disable="projects"
@@ -169,7 +169,8 @@ export function Payroll() {
         load={load}
         handleExcel={handleExcel}
       />
-     <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
+      {data?.page && (
+        <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
         <div className="flex gap-1 lg:gap-2 ">
           <button
             className="rounded border px-6 py-2 hover:bg-primary hover:text-white  text-sm  m-0 "
@@ -188,6 +189,7 @@ export function Payroll() {
           </button>
         </div>
       </div>
+      )}
     </div>
   );
 }

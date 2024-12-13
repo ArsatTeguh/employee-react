@@ -51,7 +51,7 @@ export function AttedancesList({}: Props) {
   }, [searchQuery, page]);
 
   return (
-    <div className="w-full p-4 lg:p-8 min-h-[510px] lg:min-h-[745px]">
+    <div className="w-full p-4 lg:p-8 h-screen lg:min-h-[745px]">
       <div className="flex flex-col pb-8 gap-1 lg:gap-2 justify-center items-center">
         <p className="lg:text-3xl text-2xl font-semibold">Attedances Data</p>
         <p className=" lg:w-1/2 text-center text-zinc-500 text-sm">

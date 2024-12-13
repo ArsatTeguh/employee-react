@@ -41,7 +41,7 @@ export function LeaveNon() {
   }, [reload]);
 
   return (
-    <div className="w-full p-4 lg:p-8  lg:min-h-[745px] ">
+    <div className="w-full p-4 lg:p-8 h-screen  lg:min-h-[745px] ">
        {isAdd && <AddLeave setIsAdd={handleOpenProject} load={load} handleEmployee={handleEmployee} message={msg} isError={err}  />}
       <div className="flex flex-col pb-14 lg:gap-2 gap-1 justify-center items-center">
         <p className="lg:text-3xl text-2xl font-semibold">Leave Data</p>
