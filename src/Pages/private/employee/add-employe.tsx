@@ -57,9 +57,9 @@ export function AddEmploye({loading, msg, setIsAdd, handleEmployee, message, isE
   }
 
   return (
-    <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start lg:items-center justify-center p-4">
+    <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex pt-10 lg:pt-0 items-start lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-xl shadow-xl">
-        <div className="px-4 lg:px-6 lg:pb-8 pb-4 pt-12 relative">
+        <div className="px-6 lg:pb-8 pb-6 pt-12 relative">
           {/* Header */}
           <div className=" lg:mb-2 flex gap-1 px-2">
             <p className="-rotate-12 text-lg">
@@ -213,7 +213,7 @@ export function AddEmploye({loading, msg, setIsAdd, handleEmployee, message, isE
             <button
               disabled={validate || loading} 
             type="submit" className="px-4 py-2 text-sm lg:text-base disabled:bg-zinc-500 bg-primary w-full border text-white rounded-md hover:bg-primary/90 focus:ring-offset-2">
-              Add employee
+              Create
             </button>
           </div>
           </form>

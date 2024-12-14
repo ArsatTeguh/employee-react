@@ -53,7 +53,7 @@ export function AddLeave({
   return (
     <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start pt-20 lg:pt-0 lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-xl shadow-xl">
-        <div className="px-4 lg:px-6 pb-8 pt-12 relative">
+        <div className="px-6 pb-8 pt-12 relative">
           {/* Header */}
           <div className=" mb-2 flex gap-1 px-2">
             <p className="-rotate-12 text-lg">

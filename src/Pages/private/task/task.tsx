@@ -131,11 +131,11 @@ export function Task({role,currentTask, setCurrentTask,refreshTask, msg, task, u
                           <span className="text-zinc-400 text-xl ">
                             <RiDraggable />
                           </span>
-                          <div className="grid grid-cols-5 lg:grid-cols-8 w-full border border-zinc-100 pl-3 hover:bg-zinc-100  bg-zinc-50 px-5 py-2">
-                            <p className="col-span-2  ">{v.title}</p>
+                          <div className="grid grid-cols-5 lg:grid-cols-8 w-full border border-zinc-100 pl-3 hover:bg-zinc-100  bg-zinc-50 lg:px-5 py-2 gap-4 lg:gap-0">
+                            <p className="col-span-2  truncate">{v.title}</p>
                             <div className="flex items-center gap-2 lg:col-span-0 col-span-2 ">
                             <p className="text-zinc-600"><FaCircleUser/></p>
-                            <p>{v.employee}</p>
+                            <p className="truncate ">{v.employee}</p>
                           
                             </div>
 
@@ -205,7 +205,7 @@ export function Task({role,currentTask, setCurrentTask,refreshTask, msg, task, u
                             </div>
 
                             <div
-                              className="flex items-center gap-2 cursor-pointer"
+                              className="flex  items-center gap-2 cursor-pointer"
                               onClick={() => handleOpen(v.id, date)}
                             >
                               <p className="text-xl text-zinc-700  ">

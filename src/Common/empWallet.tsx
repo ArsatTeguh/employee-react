@@ -55,7 +55,7 @@ export function EditWallet({id, setEmployee, handleCLose, forms }: Props) {
   },[message])
 
   return (
-    <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start lg:items-center justify-center p-4">
+    <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start pt-10 lg:pt-0 lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-xl shadow-xl">
         <div className="px-6 pb-8 pt-12 relative">
           {/* Header */}

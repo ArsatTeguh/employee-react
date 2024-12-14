@@ -113,7 +113,7 @@ export function EmployeeById() {
                       type="file"
                       id="fileName"
                       accept=".jpg,.jpeg,.png"
-                      className="bg-transparent  w-full h-full  text-transparent cursor-pointer  absolute"
+                      className="bg-transparent  mr-10 text-transparent cursor-pointer  absolute"
                     />
                   <p className="text-base-200 text-xl ">
                     <FaCamera />
@@ -137,7 +137,7 @@ export function EmployeeById() {
                       type="file"
                       id="fileName"
                       accept=".jpg,.jpeg,.png"
-                      className="bg-transparent  w-full h-full  text-transparent cursor-pointer  absolute"
+                      className="bg-transparent  mr-10  text-transparent cursor-pointer  absolute"
                     />
                     <p className="text-base-200 text-xl ">
                       <FaCamera />
@@ -157,7 +157,7 @@ export function EmployeeById() {
                         type="file"
                         id="fileName"
                         accept=".jpg,.jpeg,.png"
-                        className="bg-transparent  w-full h-full  text-transparent cursor-pointer  absolute"
+                        className="bg-transparent  mr-10 text-transparent cursor-pointer  absolute"
                       />
                       <p className="text-base-200 text-xl ">
                         <FaCamera />

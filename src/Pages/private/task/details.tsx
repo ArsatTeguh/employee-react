@@ -91,7 +91,7 @@ export function Details({
   };
 
   return (
-    <div className="fixed inset-0  z-[8] bg-black bg-opacity-50 flex items-start lg:pt-24 justify-center p-4">
+    <div className="fixed inset-0  z-[8] bg-black bg-opacity-50 flex items-start pt-10 lg:pt-24 justify-center p-4">
       <div className=" bg-white  rounded-xl w-full max-w-lg shadow-xl">
         <div className="lg:px-6  px-2 pb-8 pt-12 relative ">
           {/* Header */}

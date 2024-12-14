@@ -181,7 +181,7 @@ export function SidebarTask() {
               } cursor-pointer font-medium text-sm hover:text-black flex items-start gap-2`}
               onClick={() => handleDataTask(v.id)}
             >
-              <p>{v.name}</p>
+              <p className="truncate">{v.name}</p>
             </li>
           ))}
          </div>
@@ -230,7 +230,7 @@ export function SidebarTask() {
                   } cursor-pointer font-medium text-sm hover:text-black flex items-center  gap-2`}
                   onClick={() => handleDataTask(v.id)}
                 >
-                  <p>{v.name}</p>
+                  <p className="truncate">{v.name}</p>
                 </div>
               ))}
             </div>

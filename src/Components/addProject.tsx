@@ -50,7 +50,7 @@ export function AddProject({
   };
 
   return (
-    <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start lg:items-center justify-center p-4">
+    <div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start pt-10 lg:pt-0  lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-lg shadow-xl">
         <div className="px-4 lg:px-6 lg:pb-8 pb-6 pt-12 relative">
           {/* Header */}

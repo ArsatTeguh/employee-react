@@ -81,7 +81,7 @@ export function EmployyeeById() {
             </p>
           </label>
         </div>
-        <div className=" px-4 lg:px-8 pt-20 lg:py-6  col-span-4 w-full  lg:min-h-[745px] ">
+        <div className=" px-4 lg:px-8 pt-20 lg:py-6  col-span-4 w-full h-screen  lg:min-h-[745px] ">
           <Outlet />
         </div>
       </div>

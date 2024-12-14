@@ -47,8 +47,8 @@ function EditProject({ id, onClose, projectData }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 flex lg:items-center justify-center bg-black/50 z-20">
-      <div className="bg-slate-50 relative rounded p-4 lg:p-8 mt-4 lg:mt-0 h-[80%] lg:h-[75%] lg:w-1/3 w-[90%]">
+    <div className="fixed inset-0 flex lg:items-center pt-10 lg:pt-0 justify-center bg-black/50 z-20">
+      <div className="bg-slate-50 relative rounded p-4 lg:p-8 mt-4 lg:mt-0 h-[70%] lg:h-[75%] lg:w-1/3 w-[90%]">
         <div
           className="px-3 bg-black/10 absolute rounded-full lg:right-4 lg:top-3 right-2 top-2 text-zinc-700 hover:bg-black/20 cursor-pointer"
           onClick={() => onClose(false)}
@@ -105,7 +105,7 @@ function EditProject({ id, onClose, projectData }: Props) {
             <select
               id="status"
               name="status"
-              className="border bg-slate-50  border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+              className="border bg-slate-50  border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary focus:border-primary block w-full p-2.5     "
               value={data.status}
               onChange={(e) => handleChange(e)}
             >
@@ -125,7 +125,7 @@ function EditProject({ id, onClose, projectData }: Props) {
             <select
               name="Estimation"
               id="estimation"
-              className="border bg-slate-50  border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+              className="border bg-slate-50  border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary focus:border-primary block w-full p-2.5 "
               value={data.Estimation}
               onChange={(e) => handleChange(e)}
             >

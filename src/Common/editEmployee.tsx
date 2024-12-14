@@ -42,9 +42,9 @@ const close = () => {
   }
 
   return (
-<div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start  pt-20 lg:pt-0  lg:items-center justify-center p-4">
+<div className="fixed inset-0  z-20 bg-black bg-opacity-50 flex items-start  pt-10 lg:pt-0  lg:items-center justify-center p-4">
       <div className="bg-white rounded-xl w-full max-w-xl shadow-xl">
-        <div className="lg:px-6 px-4 pt-12 pb-8 relative">
+        <div className="px-6  pt-12 pb-8 relative">
           {/* Header */}
           <div className=" mb-2 flex gap-1 px-2">
             <p className="-rotate-12 text-lg">

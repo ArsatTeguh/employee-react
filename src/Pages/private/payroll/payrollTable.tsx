@@ -234,7 +234,7 @@ export function TablePayroll({
               ) : message === "Data empty" ? (
                 <tr className="relative">
                   <div className=" absolute w-full py-5  flex justify-center items-center">
-                    <p className="lg:text-xl  text-zinc-300">No Record</p>
+                    <p className="text-xl  text-zinc-300">No Record</p>
                   </div>
                 </tr>
               ) : (

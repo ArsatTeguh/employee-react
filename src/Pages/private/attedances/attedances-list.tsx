@@ -66,7 +66,8 @@ export function AttedancesList({}: Props) {
         handleChange={handleChange}
         message={message}
       />
-      <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
+         {data?.page && (
+        <div className="w-full flex   mt-4 lg:mt-0 justify-end ">
         <div className="flex gap-1 lg:gap-2 ">
           <button
             className="rounded border px-6 py-2 hover:bg-primary hover:text-white  text-sm  m-0 "
@@ -85,6 +86,7 @@ export function AttedancesList({}: Props) {
           </button>
         </div>
       </div>
+      )}
     </div>
   );
 }
