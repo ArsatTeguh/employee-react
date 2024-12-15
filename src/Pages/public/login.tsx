@@ -31,7 +31,7 @@ export const Login = () => {
         }
       );
       const data = res.data;
-      Cookies.set("token", data.data);
+      Cookies.set("token", data.data, { expires: 1 });
       const lastPath = localStorage.getItem('path')
       if (lastPath == "") {
         window.location.reload();
