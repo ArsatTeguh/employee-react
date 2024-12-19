@@ -21,27 +21,27 @@ export const Login = () => {
     event.preventDefault();
     setLoading(true);
     setValid(true);
-    setMesage("")
+    setMesage("");
     try {
       const res = await axios.post(
-        '/auth/login',
-         { email, password },
-         {
+        "/auth/login",
+        { email, password },
+        {
           withCredentials: true,
         }
       );
       const data = res.data;
       Cookies.set("token", data.data, { expires: 1 });
-      const lastPath = localStorage.getItem('path')
+      const lastPath = localStorage.getItem("path");
       if (lastPath == "") {
         window.location.reload();
       } else {
-          window.location.href = lastPath ?? "";
+        window.location.href = lastPath ?? "";
       }
-      
     } catch (error: any) {
       setValid(false);
-      const err = error.response?.data?.message || 'Somethings Wrong, Pleases try Again'
+      const err =
+        error.response?.data?.message || "Somethings Wrong, Pleases try Again";
       setMesage(err);
     } finally {
       setLoading(false);
@@ -54,7 +54,9 @@ export const Login = () => {
         <div className="flex flex-col ">
           <div className="flex flex-col lg:gap-2 pb-10">
             <p className="text-xl lg:text-2xl font-semibold ">PT LOREM</p>
-            <p className="text-3xl lg:text-4xl font-semibold">Login Your Account</p>
+            <p className="text-3xl lg:text-4xl font-semibold">
+              Login Your Account
+            </p>
             <p className="lg:pt-2 pt-3 text-md lg:text-base">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Provident, ad.
@@ -65,11 +67,28 @@ export const Login = () => {
               valid ? "h-0 " : "h-auto  py-2 px-4 "
             }`}
           >
-            {!valid && <p className="text-zinc-100 text-md lg:text-base">{message}</p>}
+            {!valid && (
+              <p className="text-zinc-100 text-md lg:text-base">{message}</p>
+            )}
+          </div>
+          <div className="flex flex-col border gap-2 bg-primary/30 relative px-4 py-2 text-sm rounded-md ">
+            <div className="z-[1] border-b pb-2">
+              <p className="font-medium">HR</p>
+              <p>Email : arsatteguh@gmail.com</p>
+              <p>Password : 12345678</p>
+            </div>
+            <div className="z-[1]">
+              <p className="font-medium">Employee</p>
+              <p>Email : konsta@gmail.com</p>
+              <p>Password : 12345678</p>
+            </div>
+
           </div>
           <form className="flex flex-col gap-6 pt-4" onSubmit={Onsubmit}>
             <div className="relative flex flex-col gap-2 w-full h-full">
-              <label htmlFor="email" className="text-md lg:text-base">Email</label>
+              <label htmlFor="email" className="text-md lg:text-base">
+                Email
+              </label>
               <input
                 onChange={(e) => onEmail(e.target.value)}
                 type="email"
@@ -81,7 +100,9 @@ export const Login = () => {
             </div>
 
             <div className="relative flex flex-col gap-2 w-full h-full ">
-              <label htmlFor="password" className="text-md lg:text-base">Password</label>
+              <label htmlFor="password" className="text-md lg:text-base">
+                Password
+              </label>
               <input
                 onChange={(e) => onPassword(e.target.value)}
                 type={isHidden ? "text" : "password"}
